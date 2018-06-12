@@ -1,0 +1,14 @@
+@import "./common.less";
+// tooltip
+.fivexu_tooltip {
+  display: none;
+  box-sizing: border-box;
+  border: 1px solid @border-color;
+  position: fixed;
+  z-index: @z-index-tooltip;
+  background-color: @white;
+  text-align: center;
+  &.show {
+    display: block;
+  }
+}

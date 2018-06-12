@@ -1,0 +1,76 @@
+/**  基础主题 样式管理  **/
+// 色彩管理
+@white: #fff;
+@primary-color: #407dd1; // 默认连接颜色
+@primary-color-light: #62a5ff;
+@primary-color-dark: #27508d;
+@parallax-color: #79eead; // 普通
+@success-color: #3cbb5b; // 成功
+@success-bg: #f0f9eb; // 成功弹窗背景色
+@success-border: #e1f3d8; // 成功弹窗边框
+@warning-color: #ff8441; // 警告
+@warning-bg: #fdf6ec; // 警告弹窗背景色
+@warning-border: #faecd8; // 警告弹窗边框色
+@error-color: #d93b25; // 错误
+@error-bg: #fef0f0; // 错误
+@error-border: #fde2e2; // 错误
+@font-color-dark: #333; // 标题
+@font-color: #666; // 文字内容
+@font-color-light: #999; // 失效文字
+@border-color: #dcdcdc; // 边框色
+@bg-dark: #333743; // 背景色  深色
+@bg-color: #d9dee4; // 背景色  普通
+@bg-light: #f0f0f0; // 背景色  浅色
+
+// 高度样式
+@height-mini: 24px; // 小模块
+@height-default: 32px; // 普通模块
+@height-large: 40px; // 大模块
+
+// 字体大小
+@font-title: 14px; // 标题
+@font-subtitle: 12px; // 副标题
+
+// 层级z-index
+@z-index-base: 1001; // 最高层级
+@z-index-nav: 1000; // 一般弹窗层级
+@z-index-tooltip: 999; // 一般tooltip
+
+// 圆角
+@border-radius-btn: 4px; // 按钮圆角
+
+// 间距宽度
+@padding-default: 20px;
+
+/**  基础主题 方法管理  **/
+// 边框线
+.border(@color:@border-color;@border:1px;@type:solid) {
+  border: @border @type @color;
+}
+
+.border-radius(@radius:4px) {
+  border-radius: @radius;
+}
+
+.iconfont(@color: @font-color,@size: 16px) {
+  font-family: "iconfont" !important;
+  font-style: normal;
+  font-size: @size;
+  color: @color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 单行文字超出隐藏
+.text-hidden {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 10号字体
+.font-size10 () {
+  font-size: 12px;
+  transform: scale(0.75);
+  *font-size: 9px;
+}
