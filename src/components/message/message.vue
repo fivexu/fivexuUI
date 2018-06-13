@@ -106,7 +106,7 @@
 			padding: 0 10px;
 			border-radius: @border-radius-btn;
 			border: 1px solid @primary-color;
-			background-color: @primary-color-light;
+			background-color: @primary-hover;
 			color: @white;
 			&.top-enter {
 				transform: translateY(-100%);

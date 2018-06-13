@@ -81,8 +81,8 @@
 		display: flex;
 		flex-wrap: nowrap;
 		&.default {
-			height: @height-default;
-			line-height: @height-default;
+			height: @height-normal;
+			line-height: @height-normal;
 		}
 		&.mini {
 			height: @height-mini;

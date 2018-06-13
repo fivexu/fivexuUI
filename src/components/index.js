@@ -1,13 +1,13 @@
 import Vue from 'vue';
-import loading from './loading/loadingClass.js';
-import message from './message/messageClass.js';
+import Loading from './loading/loadingClass.js';
+import Message from './message/messageClass.js';
 import tooltip from './tooltip/tooltipClass.js';
 import './util/style/componets.less'
 
 let global = {
   install: function () {
-    new loading(Vue);
-    new message(Vue);
+    Loading.initLoading(Vue);
+    Message.initMessage(Vue);
     Vue.directive('tooltip', tooltip)
   }
 };

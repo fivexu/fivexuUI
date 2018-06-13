@@ -1,21 +1,16 @@
-import Vue from 'vue'
 import loadingVue from './loading'
 
-class loadingClass {
-  constructor(vue) {
-    this.initLoading(vue)
-  }
-
+let loadingClass = {
   initLoading(vue) {
     let loadingCons = vue.extend(loadingVue);
     let loaded = null;
-    let container = document.createElement("div");
-    document.body.appendChild(container);
     if (!vue.prototype.$fivexu) {
       vue.prototype.$fivexu = {}
     }
     vue.prototype.$fivexu.loading = {
       show: function (options = {}) {
+        let container = document.createElement("div");
+        document.body.appendChild(container);
         loaded = new loadingCons({
           el: container,
           propsData: {

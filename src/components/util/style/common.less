@@ -1,19 +1,28 @@
 /**  基础主题 样式管理  **/
 // 色彩管理
 @white: #fff;
+@font-white: #fff;
 @primary-color: #407dd1; // 默认连接颜色
-@primary-color-light: #62a5ff;
+@primary-hover: #62a5ff; // hover
 @primary-color-dark: #27508d;
+@primary-disable: #81a5d7; // 禁止选中
+@primary-bg: #81a5d7; // 弹窗背景色
 @parallax-color: #79eead; // 普通
 @success-color: #3cbb5b; // 成功
+@success-hover: #79eead; // hover
+@success-disable: #8ad69d; // 禁止选中
 @success-bg: #f0f9eb; // 成功弹窗背景色
 @success-border: #e1f3d8; // 成功弹窗边框
 @warning-color: #ff8441; // 警告
+@warning-hover: #ffa33f; // hover
+@warning-disable: #ffb58d; // 禁止选中
 @warning-bg: #fdf6ec; // 警告弹窗背景色
 @warning-border: #faecd8; // 警告弹窗边框色
 @error-color: #d93b25; // 错误
-@error-bg: #fef0f0; // 错误
-@error-border: #fde2e2; // 错误
+@error-hover: #d95326; // hover
+@error-disable: #e8897c; // 禁止选中
+@error-bg: #fef0f0; // 错误背景色
+@error-border: #fde2e2; // 错误弹窗边框色
 @font-color-dark: #333; // 标题
 @font-color: #666; // 文字内容
 @font-color-light: #999; // 失效文字
@@ -21,10 +30,12 @@
 @bg-dark: #333743; // 背景色  深色
 @bg-color: #d9dee4; // 背景色  普通
 @bg-light: #f0f0f0; // 背景色  浅色
+@bg-white: #fff; // 背景色  白色
+@bg-black: #000; // 背景色  黑色
 
 // 高度样式
 @height-mini: 24px; // 小模块
-@height-default: 32px; // 普通模块
+@height-normal: 32px; // 正常模块
 @height-large: 40px; // 大模块
 
 // 字体大小
@@ -40,11 +51,20 @@
 @border-radius-btn: 4px; // 按钮圆角
 
 // 间距宽度
-@padding-default: 20px;
+@padding-default: 20px; // 弹窗间距
+@padding-button: 10px; // 按钮间距
+@padding-input: 10px; // input间距
 
-/**  基础主题 方法管理  **/
-// 边框线
-.border(@color:@border-color;@border:1px;@type:solid) {
+// input
+@input-border: #ccc; // input边框
+@input-focus: #66afe9; // input聚焦
+@input-inset-shadow: rgba(0, 0, 0, .075); // input内阴影
+@input-outset-shadow: rgba(102, 175, 233, .6); // input外阴影
+@input-disable: #eee; // 禁用input
+@input-bg: #fff; // input 背景色
+
+/**  基础主题 方法管理  **/ // 边框线.border(@color:@border-color;
+.border(@color:@border-color,@border: 1px,@type: solid) {
   border: @border @type @color;
 }
 
@@ -73,4 +93,20 @@
   font-size: 12px;
   transform: scale(0.75);
   *font-size: 9px;
+}
+
+// 阴影
+.box-shadow(@set,@x:0,@y:0,@n:0,@m:0,@color:rgba(0,0,0,.5)) {
+  box-shadow: @set @x @y @n @m @color;
+  -webkit-box-shadow: @set @x @y @n @m @color;
+  -o-box-shadow: @set @x @y @n @m @color;
+  -moz-box-shadow: @set @x @y @n @m @color;
+}
+
+// 延时
+.transition(@time:0.3s,@option:all,@path:ease-in-out) {
+  transition: @option @time;
+  -moz-transition: @option @time;
+  -webkit-transition: @option @time;
+  -o-transition: @option @time;
 }
