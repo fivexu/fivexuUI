@@ -4,10 +4,23 @@
   display: none;
   box-sizing: border-box;
   border: 1px solid @border-color;
+  border-radius: @border-radius-btn;
   position: fixed;
   z-index: @z-index-tooltip;
-  background-color: @white;
+  background-color: @tooltip-bg;
+  color: @tooltip-color;
   text-align: center;
+  padding: 0 @padding-button;
+  height: @tooltip-height;
+  line-height: @tooltip-height;
+  &:after {
+    content: '';
+    border: 5px solid transparent;
+    border-top-color: @tooltip-bg;
+    position: absolute;
+    left: 50%-2.5px;
+    bottom: -10px;
+  }
   &.show {
     display: block;
   }

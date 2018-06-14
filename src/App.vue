@@ -9,7 +9,7 @@
             <f-input v-model="inputs"></f-input>
         </div>
         <div class="box">
-            <f-button @clickEvt="click"></f-button>
+            <f-button @clickEvt="click" v-tooltip.top="'awsfweagweagwagweagwagwagwaeg'"></f-button>
             <f-button @clickEvt="click2"></f-button>
         </div>
         <div>
