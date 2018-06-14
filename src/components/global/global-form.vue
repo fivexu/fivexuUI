@@ -25,7 +25,7 @@
   })
   export default class globalForm extends global {
     updateModel(value) {
-      this.$emit("input", value);
+      this.$emit('input', value);
     }
 
     isReadonly() {

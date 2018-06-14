@@ -2,7 +2,7 @@
     <div class="input">
         <input :class="size"
                v-model="inputValue"
-               type="text">
+               type="text"/>
     </div>
 </template>
 

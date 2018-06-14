@@ -63,6 +63,9 @@
 @input-disable: #eee; // 禁用input
 @input-bg: #fff; // input 背景色
 
+// message
+@message-width: 200px;  // message的宽度
+
 /**  基础主题 方法管理  **/ // 边框线.border(@color:@border-color;
 .border(@color:@border-color,@border: 1px,@type: solid) {
   border: @border @type @color;
@@ -109,4 +112,72 @@
   -moz-transition: @option @time;
   -webkit-transition: @option @time;
   -o-transition: @option @time;
+}
+
+// transition 向左运动
+.transition-to-left() {
+  &.left-enter {
+    transform: translateX(100%);
+  }
+  &.left-enter-active {
+    transition: all 0.3s;
+  }
+  &.left-leave {
+    transform: translateX(0);
+  }
+  &.left-leave-active {
+    transform: translateX(100%);
+    transition: all 0.3s;
+  }
+}
+
+// transition 向右运动
+.transition-to-right() {
+  &.right-enter {
+    transform: translateX(-100%);
+  }
+  &.right-enter-active {
+    transition: all 0.3s;
+  }
+  &.right-leave {
+    transform: translateX(0);
+  }
+  &.right-leave-active {
+    transform: translateX(-100%);
+    transition: all 0.3s;
+  }
+}
+
+// transition 向上运动
+.transition-to-top() {
+  &.top-enter {
+    transform: translateY(100%);
+  }
+  &.top-enter-active {
+    transition: all 0.3s;
+  }
+  &.top-leave {
+    transform: translateY(0);
+  }
+  &.top-leave-active {
+    transform: translateY(100%);
+    transition: all 0.3s;
+  }
+}
+
+// transition 向下运动
+.transition-to-bottom() {
+  &.bottom-enter {
+    transform: translateY(-100%);
+  }
+  &.bottom-enter-active {
+    transition: all 0.3s;
+  }
+  &.bottom-leave {
+    transform: translateY(0);
+  }
+  &.bottom-leave-active {
+    transform: translateY(-100%);
+    transition: all 0.3s;
+  }
 }
