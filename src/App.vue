@@ -2,15 +2,19 @@
     <div id="app">
         <!--<Page></Page>-->
         <div class="children"
-             v-tooltip.right="'text text text text text text text text text text text text text text '">
+             v-tooltip.top="'text text text text text text text text text text text text text text '">
             box this is box!!!
         </div>
         <div class="box">
-            <f-input v-model="inputs"></f-input>
+            <f-input :disable="false" :clear="true" :placeholder="'请输入'" v-model="inputs"></f-input>
         </div>
         <div class="box">
-            <f-button @clickEvt="click" v-tooltip.top="'awsfweagweagwagweagwagwagwaeg'"></f-button>
-            <f-button @clickEvt="click2"></f-button>
+            <f-button :radius="true" :type="'error'" :disable="false" @clickEvt="click"
+                      v-tooltip.top="'awsfweagweagwagweagwagwagwaeg'"></f-button>
+            <f-button :type="'success'" :disable="false" @clickEvt="click2">
+                <i class="iconfont icon-success"></i>
+                成功
+            </f-button>
         </div>
         <div>
             <!--<Message :message="'fff'" :messageShow="messageShow"></Message>-->
@@ -36,21 +40,17 @@
         },
         methods: {
             testMessage() {
-                this.n++
-                this.$fivexu.message.show({
-                    message: `这是提示这是提示这是提示这是提示,这是提示这是提示${this.n}!!!!!!!!!!!!!!!!`,
-                    mesType: 'error',
-                    mesPosition: 'top-right',
-                    duration: 3000
-                });
+                this.n++;
+                this.$fivexu.message.show({});
             },
             testMessage2() {
-                this.n++
+                this.n++;
                 this.$fivexu.message.show({
-                    message: `这是提示这是提示这是提示这是提示,这是提示这是提示${this.n}!!!!!!!!!!!!!!!!`,
-                    mesType: 'success',
-                    mesPosition: 'top-right',
-                    duration: 1000
+                    message: `这是提示\t\n\r这是提示这是提示这是提示,这是提示这是提示${this.n}!!!!!!!!!!!!!!!!`,
+                    mesType: 'error',
+                    mesPosition: 'bottom-right',
+                    transitionName: 'left',
+                    duration: 30000
                 });
             },
             testLoading() {
@@ -68,7 +68,7 @@
         },
         mounted() {
             // this.testMessage();
-            // this.testLoading()
+            this.testLoading()
             setTimeout(() => {
                 this.messageShow = true
             }, 100)
@@ -88,6 +88,8 @@
 </script>
 
 <style lang="less">
+    @import "components/util/font/iconfont.css";
+
     #app {
         .box {
             width: 300px;
@@ -97,7 +99,7 @@
             border: 1px solid #ccc;
             position: absolute;
             left: 0;
-            top: 0;
+            top: 40px;
             width: 200px;
             height: 30px;
             line-height: 30px;

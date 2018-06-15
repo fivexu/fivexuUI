@@ -5,7 +5,7 @@
 @primary-color: #407dd1; // 默认连接颜色
 @primary-hover: #62a5ff; // hover
 @primary-color-dark: #27508d;
-@primary-disable: #81a5d7; // 禁止选中
+@primary-disable: #5c9cf0; // 禁止选中
 @primary-bg: #81a5d7; // 弹窗背景色
 @parallax-color: #79eead; // 普通
 @success-color: #3cbb5b; // 成功
@@ -52,7 +52,7 @@
 
 // 间距宽度
 @padding-default: 20px; // 弹窗间距
-@padding-button: 10px; // 按钮间距
+@padding-button: 15px; // 按钮间距
 @padding-input: 10px; // input间距
 
 // input
@@ -62,6 +62,7 @@
 @input-outset-shadow: rgba(102, 175, 233, .6); // input外阴影
 @input-disable: #eee; // 禁用input
 @input-bg: #fff; // input 背景色
+@input-border-radius: 4px; // input 圆角
 
 // message
 @message-width: 200px; // message的宽度
@@ -80,11 +81,11 @@
   border-radius: @radius;
 }
 
-.iconfont(@color: @font-color,@size: 16px) {
+.iconfont(@color: @font-color,@size: 12px) {
   font-family: "iconfont" !important;
   font-style: normal;
   font-size: @size;
-  color: @color;
+  color: @color!important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -104,34 +105,45 @@
 }
 
 // 阴影
-.box-shadow(@set,@x:0,@y:0,@n:0,@m:0,@color:rgba(0,0,0,.5)) {
-  box-shadow: @set @x @y @n @m @color;
-  -webkit-box-shadow: @set @x @y @n @m @color;
-  -o-box-shadow: @set @x @y @n @m @color;
-  -moz-box-shadow: @set @x @y @n @m @color;
+.box-shadow(@option,@option2:'') {
+  -webkit-box-shadow: @option, @option2;
+  -o-box-shadow: @option, @option2;
+  -moz-box-shadow: @option, @option2;
+  box-shadow: @option, @option2;
 }
 
 // 延时
-.transition(@time:0.3s,@option:all,@path:ease-in-out) {
-  transition: @option @time;
-  -moz-transition: @option @time;
-  -webkit-transition: @option @time;
-  -o-transition: @option @time;
+.transition(@option) {
+  -moz-transition: @option;
+  -webkit-transition: @option;
+  -o-transition: @option;
+  transition: @option;
+}
+
+// 动画
+.transform(@option) {
+  -webkit-transform: @option;
+  -o-transform: @option;
+  -moz-transform: @option;
+  -ms-transform: @option;
+  transform: @option;
 }
 
 // transition 向左运动
 .transition-to-left() {
   &.left-enter {
-    transform: translateX(100%);
+    .transform(translateX(100%));
+    opacity: 0;
   }
   &.left-enter-active {
     transition: all 0.3s;
   }
   &.left-leave {
-    transform: translateX(0);
+    .transform(translateX(0));
   }
   &.left-leave-active {
-    transform: translateX(100%);
+    .transform(translateX(100%));
+    opacity: 0;
     transition: all 0.3s;
   }
 }
@@ -139,16 +151,18 @@
 // transition 向右运动
 .transition-to-right() {
   &.right-enter {
-    transform: translateX(-100%);
+    .transform(translateX(-100%));
+    opacity: 0;
   }
   &.right-enter-active {
     transition: all 0.3s;
   }
   &.right-leave {
-    transform: translateX(0);
+    .transform(translateX(0));
   }
   &.right-leave-active {
-    transform: translateX(-100%);
+    .transform(translateX(-100%));
+    opacity: 0;
     transition: all 0.3s;
   }
 }
@@ -156,16 +170,18 @@
 // transition 向上运动
 .transition-to-top() {
   &.top-enter {
-    transform: translateY(100%);
+    .transform(translateY(100%));
+    opacity: 0;
   }
   &.top-enter-active {
     transition: all 0.3s;
   }
   &.top-leave {
-    transform: translateY(0);
+    .transform(translateY(0));
   }
   &.top-leave-active {
-    transform: translateY(100%);
+    .transform(translateY(100%));
+    opacity: 0;
     transition: all 0.3s;
   }
 }
@@ -173,16 +189,27 @@
 // transition 向下运动
 .transition-to-bottom() {
   &.bottom-enter {
-    transform: translateY(-100%);
+    .transform(translateY(-100%));
+    opacity: 0;
   }
   &.bottom-enter-active {
     transition: all 0.3s;
   }
   &.bottom-leave {
-    transform: translateY(0);
+    .transform(translateY(0));
   }
   &.bottom-leave-active {
-    transform: translateY(-100%);
+    .transform(translateY(-100%));
+    opacity: 0;
     transition: all 0.3s;
   }
+}
+
+.position-center() {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
 }

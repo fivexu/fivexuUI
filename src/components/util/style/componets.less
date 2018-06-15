@@ -13,13 +13,33 @@
   padding: 0 @padding-button;
   height: @tooltip-height;
   line-height: @tooltip-height;
-  &:after {
-    content: '';
-    border: 5px solid transparent;
-    border-top-color: @tooltip-bg;
+  .fivexu_tooltip_after {
     position: absolute;
-    left: 50%-2.5px;
-    bottom: -10px;
+    border: 6px solid transparent;
+    &.top {
+      border-top-color: @tooltip-bg;
+      left: 50%;
+      bottom: -12px;
+      margin-left: -6px;
+    }
+    &.bottom {
+      border-bottom-color: @tooltip-bg;
+      left: 50%;
+      top: -12px;
+      margin-left: -6px;
+    }
+    &.left {
+      border-left-color: @tooltip-bg;
+      right: -12px;
+      top: 50%;
+      margin-top: -6px;
+    }
+    &.right {
+      border-right-color: @tooltip-bg;
+      left: -12px;
+      top: 50%;
+      margin-top: -6px;
+    }
   }
   &.show {
     display: block;

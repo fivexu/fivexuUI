@@ -14,6 +14,10 @@ class TooltipClass {
     show() {
         if (!this._init) {
             this.init();
+        } else {
+            setTimeout(() => {
+                this.getTooltipPosition(this.bindPosition);
+            })
         }
         clearTimeout(this.timer);
         this.tooltip.setAttribute('class', 'fivexu_tooltip show');
@@ -35,6 +39,7 @@ class TooltipClass {
         this.currentElement.removeEventListener('mouseleave', this.hide);
     }
 
+    // 当tooltip存在时,仅改变内容
     setContent(msg) {
         if (this._init) {
             this.tooltip.innerHTML = msg;
@@ -43,6 +48,7 @@ class TooltipClass {
         }
     }
 
+    // 监听mouse事件
     addListen() {
         this.show = this.show.bind(this);
         this.hide = this.hide.bind(this);
@@ -74,8 +80,11 @@ class TooltipClass {
     // 初始化tooltip
     init() {
         let wrapperTooltip = document.createElement('div');
+        let tooltipAfter = document.createElement('div');
         wrapperTooltip.innerHTML = this.bindValue;
+        wrapperTooltip.appendChild(tooltipAfter);
         this.tooltip = wrapperTooltip;
+        this.tooltipAfter = tooltipAfter;
         this._init = true;
         setTimeout(() => {
             document.body.appendChild(this.tooltip);
@@ -88,11 +97,11 @@ class TooltipClass {
         const info = this.currentElement.getBoundingClientRect();
         const t = info.top - this.tooltip.offsetHeight - this.tooltipPadding;
         const l = (info.width - this.tooltip.offsetWidth) / 2 + info.left;
-        console.log(info.width, this.tooltip.offsetWidth, info.left)
         if (t < 0) {
             this.setTooltipPositionBottom();
             return
         }
+        this.tooltipAfter.setAttribute('class', 'fivexu_tooltip_after top');
         this.tooltip.style.left = `${l}px`;
         this.tooltip.style.top = `${t}px`;
     }
@@ -102,10 +111,11 @@ class TooltipClass {
         const info = this.currentElement.getBoundingClientRect();
         const b = info.top + info.height + this.tooltipPadding;
         const l = (info.width - this.tooltip.offsetWidth) / 2 + info.left;
-        if (b > window.innerHeight) {
+        if (b + this.tooltip.offsetHeight > window.innerHeight) {
             this.setTooltipPositionTop();
             return;
         }
+        this.tooltipAfter.setAttribute('class', 'fivexu_tooltip_after bottom');
         this.tooltip.style.left = `${l}px`;
         this.tooltip.style.top = `${b}px`;
     }
@@ -119,6 +129,7 @@ class TooltipClass {
             this.setTooltipPositionRight();
             return;
         }
+        this.tooltipAfter.setAttribute('class', 'fivexu_tooltip_after left');
         this.tooltip.style.left = `${l}px`;
         this.tooltip.style.top = `${t}px`;
     }
@@ -132,6 +143,7 @@ class TooltipClass {
             this.setTooltipPositionLeft();
             return;
         }
+        this.tooltipAfter.setAttribute('class', 'fivexu_tooltip_after right');
         this.tooltip.style.left = `${info.left + info.width + this.tooltipPadding}px`;
         this.tooltip.style.top = `${t}px`;
     }
@@ -139,8 +151,7 @@ class TooltipClass {
 
 const tooltipOptions = {
     bind(el, binding) {
-        let tooltip = new TooltipClass(el, binding);
-        el._tooltip = tooltip;
+        el._tooltip = new TooltipClass(el, binding);
     },
     componentUpdated(el, binding) {
         if (binding.oldValue !== binding.value) {

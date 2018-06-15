@@ -13,7 +13,7 @@
     widgetName = '';
 
     isDisabled() {
-      return this.disabled;
+      return this.disable;
     }
 
     emitEvent(event) {

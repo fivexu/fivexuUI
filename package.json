@@ -15,6 +15,7 @@
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "vue": "^2.5.2",
+    "vue-class-component": "^6.2.0",
     "vue-property-decorator": "^6.1.0",
     "vue-router": "^3.0.1"
   },

@@ -1,8 +1,12 @@
 <template>
-    <transition name="bottom">
-        <div class="message" ref="mes" :class="mesPosition" v-if="messageShow">
+    <transition :name="transitionName">
+        <div class="message" ref="mes" :class="mesPosition" v-if="messageShowOwn">
             <div ref="content" class="content" v-if="messageShow" :class="mesType">
-                <span ref="text">{{message}}</span>
+                <span ref="text">
+                    <i class="iconfont" :class="'icon-'+mesType"></i>
+                    {{message}}
+                    <!--<i @click="closeMessage" class="iconfont icon-close"></i>-->
+                </span>
             </div>
         </div>
     </transition>
@@ -11,6 +15,11 @@
 <script>
     export default {
         name: 'message',
+        data() {
+            return {
+                messageShowOwn: this.messageShow
+            }
+        },
         props: {
             message: {
                 type: String,
@@ -27,6 +36,10 @@
             mesPosition: {
                 type: String,
                 default: 'top-center'
+            },
+            transitionName: {
+                type: String,
+                default: 'bottom'
             }
         },
         methods: {
@@ -34,16 +47,28 @@
                 if (!this.$refs.mes) return;
                 let width = this.$refs.text.offsetWidth + 20;
                 this.$refs.mes.style.width = `${width}px`;
+            },
+            iconClass() {
+                return `icon-${this.mesType}`
+            },
+            closeMessage() {
+                this.messageShowOwn = false
             }
         },
         mounted() {
             this.initContent();
+        },
+        watch: {
+            messageShow() {
+                this.messageShowOwn = this.messageShow
+            }
         }
     }
 </script>
 
 <style scoped lang="less">
     @import "../util/style/common";
+    @import "../util/font/iconfont.css";
 
     .message {
         line-height: 40px;
@@ -53,6 +78,10 @@
         .transition-to-right;
         .transition-to-bottom;
         .transition-to-top;
+        i {
+            .iconfont('#999', '12px');
+            cursor: pointer;
+        }
         &.top-right {
             top: 20px;
             right: 20px;
@@ -107,12 +136,6 @@
             border: 1px solid @primary-color;
             background-color: @primary-hover;
             color: @white;
-            &.top-enter {
-                transform: translateY(-100%);
-            }
-            &.top-enter-active {
-                transition: all 3s;
-            }
             &.success {
                 border: 1px solid @success-border;
                 background-color: @success-bg;

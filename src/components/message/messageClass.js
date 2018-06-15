@@ -1,7 +1,7 @@
 import messageVue from './messageList.vue';
 
 // 去重
-function setArrNoRepeat(arr, key) {
+function _setArrNoRepeat(arr, key) {
     let obj = {};
     return arr.reduce((cur, next) => {
         if (obj[next[key]] === '') {
@@ -16,7 +16,7 @@ function setArrNoRepeat(arr, key) {
 let messageClass = {
     initMessage(vue) {
         let messageVueDom = vue.extend(messageVue);
-        let container = document.createElement("div");
+        let container = document.createElement('div');
         let message = null;
         let messageArr = [];
         let id = 0;
@@ -27,13 +27,14 @@ let messageClass = {
             show: function (options = {}) {
                 id++;
                 messageArr.push(Object.assign(options, {messageShow: true, id: id}));
-                messageArr = setArrNoRepeat(messageArr, 'id');
+                messageArr = _setArrNoRepeat(messageArr, 'id');
                 if (message === null) {
                     document.body.appendChild(container);
                     message = new messageVueDom({
                         el: container,
                         propsData: {
-                            messageList: messageArr
+                            messageList: messageArr,
+                            listPosition: options.listPosition
                         }
                     });
                 } else {
@@ -46,12 +47,14 @@ let messageClass = {
                     }
                     message.messageList = messageArr;
                     if (message !== null && id <= 0) {
-                        document.body.removeChild(message.$el);
-                        messageArr = [];
-                        message = null;
-                        id = 0
+                        setTimeout(() => {
+                            document.body.removeChild(message.$el);
+                            messageArr = [];
+                            message = null;
+                            id = 0
+                        }, 300)
                     }
-                }, options.duration ? options.duration : 2000);
+                }, options.duration < 0 ? options.duration : 2000);
             },
             destroy: function () {
                 if (message !== null) {
