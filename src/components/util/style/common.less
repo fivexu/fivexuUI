@@ -6,7 +6,7 @@
 @primary-hover: #62a5ff; // hover
 @primary-color-dark: #27508d;
 @primary-disable: #5c9cf0; // 禁止选中
-@primary-bg: #81a5d7; // 弹窗背景色
+@primary-bg: #ecf5ff; // 弹窗背景色
 @parallax-color: #79eead; // 普通
 @success-color: #3cbb5b; // 成功
 @success-hover: #79eead; // hover
@@ -72,6 +72,10 @@
 @tooltip-color: #fff; // tooltip 背景色
 @tooltip-height: 30px; // tooltip 高度
 
+// radio
+@radio-border-color: #ccc; // radio 边框色
+@radio-border-color-ac: #2d8cf0; // radio 选中边框色
+
 /**  基础主题 方法管理  **/ // 边框线.border(@color:@border-color;
 .border(@color:@border-color,@border: 1px,@type: solid) {
   border: @border @type @color;
@@ -85,7 +89,7 @@
   font-family: "iconfont" !important;
   font-style: normal;
   font-size: @size;
-  color: @color!important;
+  color: @color !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

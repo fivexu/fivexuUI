@@ -2,22 +2,22 @@
     <div id="app">
         <!--<Page></Page>-->
         <div class="children"
-             v-tooltip.top="'text text text text text text text text text text text text text text '">
+             v-tooltip="'text text text text text text text text text text text text text text '">
             box this is box!!!
         </div>
         <div class="box">
-            <f-input :disable="false" :clear="true" :placeholder="'请输入'" v-model="inputs"></f-input>
+            <f-input :disable="true" :clear="true" :placeholder="'请输入'" v-model="inputs"></f-input>
         </div>
         <div class="box">
             <f-button :radius="true" :type="'error'" :disable="false" @clickEvt="click"
-                      v-tooltip.top="'awsfweagweagwagweagwagwagwaeg'"></f-button>
+                      v-tooltip="'awsfweagweagwagweagwagwagwaeg'"></f-button>
             <f-button :type="'success'" :disable="false" @clickEvt="click2">
                 <i class="iconfont icon-success"></i>
                 成功
             </f-button>
         </div>
-        <div>
-            <!--<Message :message="'fff'" :messageShow="messageShow"></Message>-->
+        <div class="box">
+            <Radio :data="radioList" @clickEvt="radioClick"></Radio>
         </div>
         <router-view/>
     </div>
@@ -28,6 +28,8 @@
     import FButton from 'components/form/button'
     import FInput from 'components/form/input'
     import Message from 'components/message/message'
+    import Tag from 'components/tag/tag'
+    import Radio from 'components/radio/radio'
 
     export default {
         name: 'App',
@@ -35,7 +37,11 @@
             return {
                 inputs: '',
                 messageShow: false,
-                n: 0
+                n: 0,
+                radioList: [
+                    {value: '男', label: 0},
+                    {value: '女', label: 1}
+                ]
             }
         },
         methods: {
@@ -47,7 +53,7 @@
                 this.n++;
                 this.$fivexu.message.show({
                     message: `这是提示\t\n\r这是提示这是提示这是提示,这是提示这是提示${this.n}!!!!!!!!!!!!!!!!`,
-                    mesType: 'error',
+                    mesType: 'success',
                     mesPosition: 'bottom-right',
                     transitionName: 'left',
                     duration: 30000
@@ -64,11 +70,14 @@
             },
             click2(ev) {
                 this.testMessage2();
+            },
+            radioClick(pos) {
+                console.log(pos)
             }
         },
         mounted() {
             // this.testMessage();
-            this.testLoading()
+            // this.testLoading()
             setTimeout(() => {
                 this.messageShow = true
             }, 100)
@@ -82,7 +91,9 @@
             Page,
             'f-button': FButton,
             'f-input': FInput,
-            Message
+            Message,
+            Tag,
+            Radio,
         }
     }
 </script>
