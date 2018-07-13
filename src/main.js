@@ -8,13 +8,13 @@ import '../src/common/style/index.less'
 
 import global from 'components/index'
 
-Vue.use(global)
+Vue.use(global);
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  components: {App},
-  template: '<App/>'
+    el: '#app',
+    router,
+    components: {App},
+    template: '<App/>'
 })

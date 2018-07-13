@@ -15,7 +15,8 @@
                 default: false
             },
             value: {
-                type: [Array, String, Number]
+                type: Array | String | Number,
+                default: ''
             },
             size: {
                 type: String,
@@ -30,6 +31,10 @@
 
         isReadonly() {
             return this.widgetReadonly;
+        }
+
+        hasSlot() {
+            return this.$slots.default
         }
     }
 </script>

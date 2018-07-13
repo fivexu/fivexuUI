@@ -17,7 +17,15 @@
             </f-button>
         </div>
         <div class="box">
-            <Radio :data="radioList" @clickEvt="radioClick"></Radio>
+            <Radio :data="radioList" v-model="radios"></Radio>
+        </div>
+        <div class="box">
+            <Checkbox v-model="checkbox">
+                <CheckboxItem :checked="true" :label="'111111'">111111</CheckboxItem>
+                <CheckboxItem :checked="true" :label="'222222'">222222</CheckboxItem>
+                <CheckboxItem :checked="true" :label="'333333'">333333</CheckboxItem>
+                <CheckboxItem :checked="true" :label="'444444'">444444</CheckboxItem>
+            </Checkbox>
         </div>
         <router-view/>
     </div>
@@ -29,7 +37,9 @@
     import FInput from 'components/form/input'
     import Message from 'components/message/message'
     import Tag from 'components/tag/tag'
-    import Radio from 'components/radio/radio'
+    import Radio from 'components/form/radio'
+    import Checkbox from 'components/form/checkbox'
+    import CheckboxItem from 'components/form/checkboxItem'
 
     export default {
         name: 'App',
@@ -39,9 +49,20 @@
                 messageShow: false,
                 n: 0,
                 radioList: [
-                    {value: '男', label: 0},
-                    {value: '女', label: 1}
-                ]
+                    {id: 1, value: 0, label: ''},
+                    {id: 2, value: 1, label: '2'},
+                    {id: 3, value: 3, label: '3', disabled: true},
+                    {id: 4, value: 4, label: '4'}
+                ],
+                checkboxList: [
+                    {id: 1, value: 0, label: 'aaaaa', checked: true, disabled: false},
+                    {id: 2, value: 2, label: 'bbbbb'},
+                    {id: 3, value: 3, label: 'ccccc', checked: true, disabled: false},
+                    {id: 4, value: 4, label: 'ddddd'},
+                    {id: 4, value: 5, label: 'eeeee'},
+                ],
+                radios: 2,
+                checkbox: 2
             }
         },
         methods: {
@@ -70,9 +91,6 @@
             },
             click2(ev) {
                 this.testMessage2();
-            },
-            radioClick(pos) {
-                console.log(pos)
             }
         },
         mounted() {
@@ -85,6 +103,12 @@
         watch: {
             inputs(val) {
                 console.log(val)
+            },
+            radios(val) {
+                console.log(val)
+            },
+            checkbox(val) {
+                console.log(val)
             }
         },
         components: {
@@ -94,17 +118,17 @@
             Message,
             Tag,
             Radio,
+            Checkbox,
+            CheckboxItem
         }
     }
 </script>
 
-<style lang="less">
-    @import "components/util/font/iconfont.css";
-
+<style scoped lang="less">
     #app {
         .box {
             width: 300px;
-            margin: 50px auto;
+            margin: 50px auto 0;
         }
         .children {
             border: 1px solid #ccc;

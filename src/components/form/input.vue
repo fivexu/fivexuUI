@@ -7,7 +7,7 @@
                v-model="inputValue"
                type="text"/>
         <div class="icon" v-if="clear&&inputValue!==''">
-            <span @click.stop="clearInputValue"><i class="iconfont icon-close"></i></span>
+            <span @click.stop="clearInputValue"><i class="iconfont icon-edit"></i></span>
         </div>
     </div>
 </template>
