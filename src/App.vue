@@ -6,26 +6,39 @@
             box this is box!!!
         </div>
         <div class="box">
-            <f-input :disable="true" :clear="true" :placeholder="'请输入'" v-model="inputs"></f-input>
+            <fx-input :disable="true" :clear="true" :placeholder="'请输入'" v-model="inputs"></fx-input>
+            <p>{{inputs}}</p>
         </div>
         <div class="box">
-            <f-button :radius="true" :type="'error'" :disable="false" @clickEvt="click"
-                      v-tooltip="'awsfweagweagwagweagwagwagwaeg'"></f-button>
-            <f-button :type="'success'" :disable="false" @clickEvt="click2">
+            <fx-button :radius="true" :type="'error'" :disable="false" @clickEvt="click"
+                       v-tooltip="'awsfweagweagwagweagwagwagwaeg'"></fx-button>
+            <fx-button :type="'success'" :disable="false" @clickEvt="click2">
                 <i class="iconfont icon-success"></i>
                 成功
-            </f-button>
+            </fx-button>
         </div>
         <div class="box">
             <Radio :data="radioList" v-model="radios"></Radio>
+            <p>{{radios}}</p>
         </div>
         <div class="box">
             <Checkbox v-model="checkbox">
-                <CheckboxItem :checked="true" :label="'111111'">111111</CheckboxItem>
-                <CheckboxItem :checked="true" :label="'222222'">222222</CheckboxItem>
-                <CheckboxItem :checked="true" :label="'333333'">333333</CheckboxItem>
+                <CheckboxItem :disable="true" :checked="false" :label="'111111'">
+                    <i class="iconfont icon-yes"></i>111111
+                </CheckboxItem>
+                <CheckboxItem :checked="false" :label="'222222'">222222</CheckboxItem>
+                <CheckboxItem :label="'333333'">333333</CheckboxItem>
                 <CheckboxItem :checked="true" :label="'444444'">444444</CheckboxItem>
             </Checkbox>
+            <p>{{checkbox}}</p>
+        </div>
+        <div class="box">
+            <Checkbox v-model="checkbox2" :data="checkboxList"></Checkbox>
+            <p>{{checkbox2.value}}</p>
+        </div>
+        <div class="box">
+            <fx-switch :size="'mini'" v-model="switchType"></fx-switch>
+            <p>{{switchType}}</p>
         </div>
         <router-view/>
     </div>
@@ -33,16 +46,16 @@
 
 <script>
     import Page from 'components/page/page'
-    import FButton from 'components/form/button'
-    import FInput from 'components/form/input'
+    import Button from 'components/form/button'
+    import Input from 'components/form/input'
     import Message from 'components/message/message'
     import Tag from 'components/tag/tag'
     import Radio from 'components/form/radio'
     import Checkbox from 'components/form/checkbox'
     import CheckboxItem from 'components/form/checkboxItem'
+    import Switch from 'components/form/switch'
 
     export default {
-        name: 'App',
         data() {
             return {
                 inputs: '',
@@ -51,18 +64,20 @@
                 radioList: [
                     {id: 1, value: 0, label: ''},
                     {id: 2, value: 1, label: '2'},
-                    {id: 3, value: 3, label: '3', disabled: true},
+                    {id: 3, value: 3, label: '3', disable: true},
                     {id: 4, value: 4, label: '4'}
                 ],
                 checkboxList: [
-                    {id: 1, value: 0, label: 'aaaaa', checked: true, disabled: false},
+                    {id: 1, value: 1, label: 'aaaaa', checked: true, disable: true},
                     {id: 2, value: 2, label: 'bbbbb'},
-                    {id: 3, value: 3, label: 'ccccc', checked: true, disabled: false},
+                    {id: 3, value: 3, label: 'ccccc', checked: true, disable: false},
                     {id: 4, value: 4, label: 'ddddd'},
                     {id: 4, value: 5, label: 'eeeee'},
                 ],
                 radios: 2,
-                checkbox: 2
+                checkbox: 2,
+                checkbox2: 2,
+                switchType: true
             }
         },
         methods: {
@@ -109,12 +124,19 @@
             },
             checkbox(val) {
                 console.log(val)
+            },
+            checkbox2(val) {
+                console.log(val)
+            },
+            switchType(val) {
+                console.log(val)
             }
         },
         components: {
             Page,
-            'f-button': FButton,
-            'f-input': FInput,
+            'fx-button': Button,
+            'fx-input': Input,
+            'fx-switch': Switch,
             Message,
             Tag,
             Radio,

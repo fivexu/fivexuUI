@@ -2,7 +2,7 @@
     <div class="checkbox_item"
          :class="[{checked:currentChecked},{disable:isDisabled()}]"
          @click="checkboxItemClick">
-        <input type="checkbox" :value="label" :checked="currentChecked">
+        <input class="fivexu_checkbox_item" type="checkbox" :value="label" :checked="currentChecked">
         <em><i class="iconfont icon-yes"></i></em>
         <span>
             <slot></slot>
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-    import {Component} from 'vue-property-decorator'
-    import GlobalForm from '../global/global-form'
+    import GlobalForm from '../global/global-form.vue'
 
-    @Component({
+    export default {
+        extends: GlobalForm,
         props: {
             label: {
                 type: String | Number | Object,
@@ -24,22 +24,23 @@
                 type: Boolean,
                 default: false
             }
-        }
-    })
-
-    export default class CheckboxItem extends GlobalForm {
-        currentChecked = false;
-
+        },
+        data() {
+            return {
+                currentChecked: false
+            }
+        },
+        methods: {
+            checkboxItemClick() {
+                if (this.isDisabled()) {
+                    return;
+                }
+                this.currentChecked = !this.currentChecked;
+                this.updateModel({value: this.label, checked: this.currentChecked})
+            }
+        },
         mounted() {
             this.currentChecked = this.checked ? this.checked : false;
-            this.updateModel({value: this.label, checked: this.currentChecked})
-        }
-
-        checkboxItemClick() {
-            if (this.isDisabled()) {
-                return;
-            }
-            this.currentChecked = !this.currentChecked;
             this.updateModel({value: this.label, checked: this.currentChecked})
         }
     }
@@ -50,6 +51,8 @@
 
     .checkbox_item {
         cursor: pointer;
+        overflow: hidden;
+        position: relative;
         &.checked {
             em {
                 color: @checkbox-ac-color;
@@ -81,6 +84,12 @@
         }
         span {
             vertical-align: middle;
+        }
+        input{
+            display: none;
+            position: absolute;
+            left: -100%;
+            top: -100%;
         }
     }
 </style>

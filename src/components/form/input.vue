@@ -13,10 +13,15 @@
 </template>
 
 <script>
-    import {Component, Watch} from 'vue-property-decorator'
-    import globalForm from '../global/global-form'
+    import globalForm from '../global/global-form.vue'
 
-    @Component({
+    export default {
+        extends: globalForm,
+        data() {
+            return {
+                inputValue: ''
+            }
+        },
         props: {
             placeholder: {
                 type: String,
@@ -26,19 +31,17 @@
                 type: Boolean,
                 default: false
             }
-        }
-    })
-    export default class input extends globalForm {
-        inputValue = '';
-
-        @Watch('inputValue')
-        onInputValueChange(val, oldVal) {
-            this.updateModel(val);
-            this.emitEvent({action: 'change', val, oldVal});
-        }
-
-        clearInputValue() {
-            this.inputValue = ''
+        },
+        methods: {
+            clearInputValue() {
+                this.inputValue = ''
+            }
+        },
+        watch: {
+            inputValue(val, oldVal) {
+                this.updateModel(val);
+                this.emitEvent({action: 'change', val, oldVal});
+            }
         }
     }
 </script>

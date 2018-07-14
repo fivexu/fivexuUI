@@ -10,15 +10,11 @@
 </template>
 
 <script>
-    import {Component} from 'vue-property-decorator'
     import Global from '../global/global'
 
-    @Component({
+    export default {
+        extends: Global,
         props: {
-            type: {
-                type: String,
-                default: 'primary'
-            },
             size: {
                 type: String,
                 default: 'normal'
@@ -27,19 +23,21 @@
                 type: Boolean,
                 default: false
             }
-        }
-    })
-
-    export default class Tag extends Global {
-        tagShow = true;
-        widgetName = 'click';
-
-        tagCloseClick($event) {
-            if (!this.close) {
-                return;
+        },
+        data() {
+            return {
+                tagShow: true,
+                widgetName: 'click'
             }
-            this.tagShow = false;
-            this.emitEvent({active: 'click', $event});
+        },
+        methods: {
+            tagCloseClick($event) {
+                if (!this.close) {
+                    return;
+                }
+                this.tagShow = false;
+                this.emitEvent({active: 'click', $event});
+            }
         }
     }
 </script>

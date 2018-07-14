@@ -14,10 +14,10 @@
 </template>
 
 <script>
-    import {Component} from 'vue-property-decorator'
-    import GlobalForm from '../global/global-form'
+    import GlobalForm from '../global/global-form.vue'
 
-    @Component({
+    export default {
+        extends: GlobalForm,
         props: {
             data: {
                 type: Array,
@@ -25,21 +25,21 @@
                     return []
                 }
             }
-        }
-    })
-
-    export default class Radio extends GlobalForm {
-        widgetName = 'click';
-
-        currentIndex = this.value ? this.value : 0;
-
-        radioClick(item) {
-            if (item.disabled ? item.disabled : false) {
-                return
+        },
+        data() {
+            return {
+                currentIndex: this.value ? this.value : 0
             }
-            this.currentIndex = item.id;
-            this.updateModel(item);
-            this.emitEvent({active: 'radioClick', data: item})
+        },
+        methods: {
+            radioClick(item) {
+                if (item.disabled ? item.disabled : false) {
+                    return
+                }
+                this.currentIndex = item.id;
+                this.updateModel(item);
+                this.emitEvent({active: 'radioClick', data: item})
+            }
         }
     }
 </script>

@@ -8,18 +8,14 @@
 </template>
 
 <script>
-    import {Component} from 'vue-property-decorator'
-    import GlobalForm from '../global/global-form'
+    import GlobalForm from '../global/global-form.vue'
 
-    @Component({
+    export default {
+        extends: GlobalForm,
         props: {
             text: {
                 type: String,
                 default: '确认'
-            },
-            type: {
-                type: String,
-                default: 'primary'
             },
             fill: {
                 type: Boolean,
@@ -29,20 +25,16 @@
                 type: Boolean,
                 default: false
             }
-        }
-    })
-
-    export default class Button extends GlobalForm {
-        widgetName = 'click';
-
-        clickEvt(ev) {
-            if (!this.isDisabled()) {
-                this.emitEvent({action: "click", ev});
+        },
+        methods: {
+            clickEvt(ev) {
+                if (!this.isDisabled()) {
+                    this.emitEvent({action: 'click', ev});
+                }
+            },
+            hasSlot() {
+                return this.$slots.default
             }
-        }
-
-        hasSlot() {
-            return this.$slots.default
         }
     }
 </script>
