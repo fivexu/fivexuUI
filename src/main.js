@@ -4,7 +4,7 @@ import router from './router'
 
 import '../src/common/style/index.less'
 
-import global from 'components/index'
+import global from 'base/index'
 
 Vue.use(global);
 
@@ -14,6 +14,6 @@ Vue.config.productionTip = false;
 new Vue({
     el: '#app',
     router,
-    components: { App },
+    components: {App},
     template: '<App/>'
 });

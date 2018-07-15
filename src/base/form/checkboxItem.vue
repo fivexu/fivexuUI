@@ -50,6 +50,8 @@
     @import "../util/style/common";
 
     .checkbox_item {
+        display: inline-block;
+        margin-right: 10px;
         cursor: pointer;
         overflow: hidden;
         position: relative;

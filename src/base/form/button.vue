@@ -55,7 +55,7 @@
         &.disable {
             cursor: not-allowed;
         }
-        &.mine {
+        &.mini {
             height: @height-mini;
             line-height: @height-mini;
             &.radius {

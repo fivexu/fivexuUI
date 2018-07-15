@@ -20,7 +20,7 @@
                 return this.disable;
             },
             emitEvent(event) {
-                this.$emit(this.widgetName + 'Evt', event);
+                this.$emit('clickEvt', event);
             }
         }
     };

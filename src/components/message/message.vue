@@ -1,156 +1,50 @@
 <template>
-    <transition :name="transitionName">
-        <div class="message" ref="mes" :class="mesPosition" v-if="messageShowOwn">
-            <div ref="content" class="content" v-if="messageShow" :class="mesType">
-                <span ref="text">
-                    <i class="iconfont" :class="'icon-'+mesType"></i>
-                    {{message}}
-                    <!--<i @click="closeMessage" class="iconfont icon-close"></i>-->
-                </span>
-            </div>
-        </div>
-    </transition>
+    <div id="message">
+        <ul class="test_list_show">
+            <li>
+                <h3>提示弹窗 原型链形式</h3>
+                <fx-button @clickEvt="messageClick">提示文字</fx-button>
+                <p>this.$fivexu.message.show({})</p>
+            </li>
+            <li>
+                <h3>提示弹窗 参数 message 显示的文字</h3>
+                <fx-button @clickEvt="messageClick2">提示文字</fx-button>
+                <p>this.$fivexu.message.show({message:'提示文字提示文字'})</p>
+            </li>
+            <li>
+                <h3>提示弹窗 参数 mesType 显示的文字主题 success warning error</h3>
+                <fx-button @clickEvt="messageClick3">提示文字</fx-button>
+                <p>this.$fivexu.message.show({mesType:'error',message: 'error'})</p>
+            </li>
+            <li>
+                <h3>提示弹窗 参数 transitionName 显示动画进入方向 top button left right</h3>
+                <fx-button @clickEvt="messageClick4">提示文字</fx-button>
+                <p>this.$fivexu.message.show({mesType:'warning',message: 'warning',transitionName:'left'})</p>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
     export default {
-        name: 'message',
-        data() {
-            return {
-                messageShowOwn: this.messageShow
-            }
-        },
-        props: {
-            message: {
-                type: String,
-                default: 'message'
-            },
-            messageShow: {
-                type: Boolean,
-                default: false
-            },
-            mesType: {
-                type: String,
-                default: 'success'
-            },
-            mesPosition: {
-                type: String,
-                default: 'top-center'
-            },
-            transitionName: {
-                type: String,
-                default: 'bottom'
-            }
-        },
+        name: "message",
         methods: {
-            initContent() {
-                if (!this.$refs.mes) return;
-                let width = this.$refs.text.offsetWidth + 20;
-                this.$refs.mes.style.width = `${width}px`;
+            messageClick() {
+                this.$fivexu.message.show({});
             },
-            iconClass() {
-                return `icon-${this.mesType}`
+            messageClick2() {
+                this.$fivexu.message.show({message: '提示文字提示文字'});
             },
-            closeMessage() {
-                this.messageShowOwn = false
-            }
-        },
-        mounted() {
-            this.initContent();
-        },
-        watch: {
-            messageShow() {
-                this.messageShowOwn = this.messageShow
-            }
+            messageClick3() {
+                this.$fivexu.message.show({mesType: 'error', message: 'error'});
+            },
+            messageClick4() {
+                this.$fivexu.message.show({mesType: 'warning', message: 'warning', transitionName: 'left'})
+            },
         }
     }
 </script>
 
 <style scoped lang="less">
-    @import "../util/style/common";
-    @import "../util/font/iconfont.css";
 
-    .message {
-        line-height: 40px;
-        position: fixed;
-        z-index: @z-index-nav;
-        .transition-to-left;
-        .transition-to-right;
-        .transition-to-bottom;
-        .transition-to-top;
-        i {
-            .iconfont('#999', '12px');
-            cursor: pointer;
-        }
-        &.top-right {
-            top: 20px;
-            right: 20px;
-        }
-        &.top-center {
-            left: 0;
-            right: 0;
-            top: 20px;
-            margin: 0 auto;
-        }
-        &.top-left {
-            top: 20px;
-            left: 20px;
-        }
-        &.middle-right {
-            right: 20px;
-            top: 0;
-            bottom: 0;
-            margin: auto 0;
-        }
-        &.center {
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-        }
-        &.middle-left {
-            left: 20px;
-            top: 0;
-            bottom: 0;
-            margin: auto 0;
-        }
-        &.bottom-right {
-            right: 20px;
-            bottom: 20px;
-        }
-        &.bottom-center {
-            left: 0;
-            right: 0;
-            bottom: 20px;
-            margin: 0 auto;
-        }
-        &.bottom-left {
-            left: 20px;
-            bottom: 20px;
-        }
-        .content {
-            white-space: nowrap;
-            padding: 0 10px;
-            border-radius: @border-radius-btn;
-            border: 1px solid @primary-color;
-            background-color: @primary-hover;
-            color: @white;
-            &.success {
-                border: 1px solid @success-border;
-                background-color: @success-bg;
-                color: @success-color;
-            }
-            &.warning {
-                border: 1px solid @warning-border;
-                background-color: @warning-bg;
-                color: @warning-color;
-            }
-            &.error {
-                border: 1px solid @error-border;
-                background-color: @error-bg;
-                color: @error-color;
-            }
-        }
-    }
 </style>

@@ -1,13 +1,13 @@
 <template>
     <div class="input" :class="[size,{'disable':isDisabled()}]">
-        <input :class="[size,{'disable':isDisabled()}]"
+        <input :class="[size,type,{'disable':isDisabled()},{clear:clear&&inputValue!==''}]"
                :placeholder="placeholder"
                :disabled="isDisabled()"
                :readonly="isDisabled()"
                v-model="inputValue"
                type="text"/>
         <div class="icon" v-if="clear&&inputValue!==''">
-            <span @click.stop="clearInputValue"><i class="iconfont icon-edit"></i></span>
+            <span @click.stop="clearInputValue"><i class="iconfont icon-close-radius"></i></span>
         </div>
     </div>
 </template>
@@ -19,7 +19,7 @@
         extends: globalForm,
         data() {
             return {
-                inputValue: ''
+                inputValue: this.value
             }
         },
         props: {
@@ -48,12 +48,11 @@
 
 <style scoped lang="less">
     @import "../util/style/common.less";
-    @import "../util/font/iconfont.css";
 
     .input {
-        width: 100%;
-        overflow: hidden;
+        width: 200px;
         position: relative;
+        display: inline-block;
         &.mini {
             height: @height-mini;
             line-height: @height-mini;
@@ -74,10 +73,29 @@
             font-size: 12px;
             background-color: @input-bg;
             border-radius: @input-border-radius;
+            border: 1px solid @border-color;
+            &.clear {
+                padding: 0 @padding-input + 15 0 @padding-input;
+            }
+            &.warning {
+                border: 1px solid @input-focus-warning;
+                &:focus {
+                    border-color: @input-focus-warning;
+                    outline: 0;
+                    .box-shadow(inset 0 1px 1px 0 @input-inset-shadow, 0 0 8px 0 @input-outset-shadow-warning);
+                }
+            }
+            &.error {
+                border: 1px solid @input-focus-error;
+                &:focus {
+                    border-color: @input-focus-error;
+                    outline: 0;
+                    .box-shadow(inset 0 1px 1px 0 @input-inset-shadow, 0 0 8px 0 @input-outset-shadow-error);
+                }
+            }
             &.disable {
                 cursor: not-allowed !important;
             }
-            .border();
             .transition(box-show 0.3s);
             &.mini {
                 height: @height-mini;
@@ -92,9 +110,9 @@
                 line-height: @height-large;
             }
             &:focus {
-                border-color: @input-focus;
+                border-color: @input-focus-primary;
                 outline: 0;
-                .box-shadow(inset 0 1px 1px 0 @input-inset-shadow, 0 0 8px 0 @input-outset-shadow);
+                .box-shadow(inset 0 1px 1px 0 @input-inset-shadow, 0 0 8px 0 @input-outset-shadow-primary);
             }
             &[readonly], &[disabled] {
                 background-color: @input-disable;
@@ -102,30 +120,23 @@
             }
         }
         > .icon {
-            width: 20px;
+            width: 30px;
             height: 30px;
             text-align: center;
             position: absolute;
-            right: 5px;
+            right: 0;
             top: 0;
             bottom: 0;
             margin: auto 0;
             cursor: pointer;
             &:hover span {
-                background-color: #999;
+                color: #999;
             }
             span {
-                display: inline-block;
-                height: 16px;
-                line-height: 16px;
-                width: 16px;
-                border-radius: 50%;
-                background-color: #ccc;
-                color: #fff;
+                color: #ccc;
                 .position-center;
-                i {
-                    .iconfont('#fff');
-                    .font-size10;
+                i{
+                    font-size: 30px!important;
                 }
             }
         }

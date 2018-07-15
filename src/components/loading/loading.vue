@@ -1,73 +1,57 @@
 <template>
-	<div class="loading" :style="{backgroundColor:bgColor}" v-if="showLoading" :class="{fixed:fixed}">
-		<div class="content" :style="{height:describe!==''?'84px':'64px'}">
-			<p v-if="describe!==''&&describePosition==='top'">{{describe}}</p>
-			<img src="./loading.gif">
-			<p v-if="describe!==''&&describePosition==='bottom'">{{describe}}</p>
-		</div>
-	</div>
+    <div id="loading">
+        <ul class="test_list_show">
+            <li>
+                <h3>loading 原型链模式</h3>
+                <fx-button @clickEvt="loadingClick">加载</fx-button>
+                <p>this.$fivexu.loading.show() 可传递对象 非必填 显示</p>
+                <p>this.$fivexu.loading.hide() 隐藏</p>
+            </li>
+            <li>
+                <h3>loading show() 可传对象 text: 显示文字 textColor: 显示文字颜色 textPosition: 文字显示位置 目前仅有 上面 top; 下面 bottom,默认 bottom</h3>
+                <fx-button @clickEvt="loadingClick1">加载(加载文字--加载中.......)</fx-button>
+            </li>
+            <li>
+                <h3>loading show() 可传对象 bgColor: 加载背景色默认 : rgba(0, 0, 0, .5)</h3>
+                <fx-button @clickEvt="loadingClick2">加载(rgba(255, 155, 55, .7))</fx-button>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
-  export default {
-    name: 'loading',
-    props: {
-      showLoading: {
-        type: Boolean,
-        default: false
-      },
-      fixed: {
-        type: Boolean,
-        default: true
-      },
-      describe: {
-        type: String,
-        default: ''
-      },
-      describePosition: {
-        type: String,
-        default: 'bottom'
-      },
-      bgColor: {
-        type: String,
-        default: 'rgba(0, 0, 0, .5)'
-      }
+    export default {
+        name: "loading",
+        methods: {
+            loadingClick() {
+                this.$fivexu.loading.show();
+                setTimeout(() => {
+                    this.$fivexu.loading.hide();
+                }, 1000)
+            },
+            loadingClick1() {
+                this.$fivexu.loading.show({
+                    text: '加载中......',
+                    textPosition: 'top'
+                });
+                setTimeout(() => {
+                    this.$fivexu.loading.hide();
+                }, 1000)
+            },
+            loadingClick2() {
+                this.$fivexu.loading.show({
+                    bgColor: 'rgba(255, 155, 55, .5)',
+                    text: '颜色--#06f',
+                    textColor: '#06f'
+                });
+                setTimeout(() => {
+                    this.$fivexu.loading.hide();
+                }, 1000)
+            },
+        }
     }
-  }
 </script>
 
 <style scoped lang="less">
-	@import "../util/style/common";
 
-	.loading {
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		left: 0;
-		top: 0;
-		z-index: @z-index-base;
-		&.fixed {
-			position: fixed;
-		}
-		.content {
-			width: 64px;
-			height: 64px;
-			position: absolute;
-			left: 0;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			margin: auto;
-			text-align: center;
-			p {
-				height: 20px;
-				line-height: 20px;
-			}
-			img {
-				width: 64px;
-				height: 64px;
-				float: left;
-			}
-		}
-	}
 </style>

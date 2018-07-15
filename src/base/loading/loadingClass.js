@@ -9,7 +9,9 @@ let loadingClass = {
         }
         vue.prototype.$fivexu.loading = {
             show: function (options = {}) {
-                this.hide();
+                if (loaded !== null) {
+                    this.hide();
+                }
                 let container = document.createElement("div");
                 document.body.appendChild(container);
                 loaded = new loadingCons({
@@ -19,7 +21,8 @@ let loadingClass = {
             },
             hide: function () {
                 if (loaded !== null) {
-                    document.body.removeChild(loaded.$el)
+                    document.body.removeChild(loaded.$el);
+                    loaded = null;
                 }
             }
         }

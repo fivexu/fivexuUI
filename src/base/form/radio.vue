@@ -2,8 +2,8 @@
     <div class="radio">
         <div class="radio_list"
              :class="[
-                 {checked:currentIndex===item.id&&!item.disabled},
-                 {'disable':item.disabled?item.disabled:false}
+                 {checked:currentIndex===item.id&&!item.disable},
+                 {'disable':item.disable?item.disable:false}
              ]"
              v-for="item in data"
              @click="radioClick(item)">
@@ -33,7 +33,7 @@
         },
         methods: {
             radioClick(item) {
-                if (item.disabled ? item.disabled : false) {
+                if (item.disable ? item.disable : false) {
                     return
                 }
                 this.currentIndex = item.id;
@@ -59,7 +59,7 @@
         }
         .radio_list {
             cursor: pointer;
-            float: left;
+            display: inline-block;
             margin-right: 10px;
             em::after {
                 content: '';
@@ -87,7 +87,7 @@
                 em {
                     background-color: @radio-disable-bg;
                     border-color: @radio-disable-border;
-                    cursor: not-allowed;
+
                     &::after {
                         content: '';
                         width: 0;
@@ -97,13 +97,14 @@
             }
             em {
                 display: inline-block;
-                width: 15px;
-                height: 15px;
+                width: 14px;
+                height: 14px;
                 border-radius: 50%;
                 border: 1px solid @radio-border-color;
                 vertical-align: middle;
                 position: relative;
                 margin-right: 5px;
+                box-sizing: unset;
             }
             span {
                 vertical-align: middle;
