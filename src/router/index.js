@@ -12,6 +12,7 @@ import Message from '../components/message/message';
 import Tag from '../components/tag/tag';
 import FullPage from '../components/fullpage/fullpage';
 import Slider from '../components/slider/slider';
+import ScrollBar from '../components/scrollBar/scrollBar';
 
 Vue.use(Router);
 
@@ -28,5 +29,6 @@ export default new Router({
         {path: '/tag', component: Tag},
         {path: '/fullpage', component: FullPage},
         {path: '/slider', component: Slider},
+        {path: '/scrollBar', component: ScrollBar},
     ]
 })

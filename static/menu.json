@@ -42,5 +42,9 @@
   {
     "link": "/slider",
     "title": "轮播图"
+  },
+  {
+    "link": "/scrollBar",
+    "title": "超出滚动条"
   }
 ]

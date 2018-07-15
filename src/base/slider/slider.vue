@@ -195,9 +195,9 @@
                 if (!this.autoPlay) {
                     return
                 }
-                clearInterval(this.timer)
+                clearInterval(this.timer);
                 this.timer = setInterval(() => {
-                    this.currentIndex++
+                    this.currentIndex++;
                     if (this.currentIndex >= this.$refs.slide.children.length) {
                         this.currentIndex = 0
                     }

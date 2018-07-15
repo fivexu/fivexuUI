@@ -15,6 +15,7 @@ import FxMenu from './menu/menu'
 
 import FxFullPage from './fullpage/fullpage'
 import Slider from './slider/slider'
+import ScrollBar from './scrollBar/scrollBar'
 
 import './util/style/componets.less'
 
@@ -33,6 +34,8 @@ let global = {
         Vue.component('fx-menu', FxMenu);
         Vue.component('fx-full-page', FxFullPage);
         Vue.component('fx-slider', Slider);
+        Vue.component('fx-slider', Slider);
+        Vue.component('fx-scroll-bar', ScrollBar);
 
         Vue.directive('tooltip', tooltip);
     }
