@@ -84,10 +84,10 @@
             }
             &.disable {
                 color: #999;
+                cursor: not-allowed;
                 em {
                     background-color: @radio-disable-bg;
                     border-color: @radio-disable-border;
-
                     &::after {
                         content: '';
                         width: 0;

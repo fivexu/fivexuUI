@@ -10,6 +10,8 @@ import Loading from '../components/loading/loading';
 import Tooltip from '../components/tooltip/tooltip';
 import Message from '../components/message/message';
 import Tag from '../components/tag/tag';
+import FullPage from '../components/fullpage/fullpage';
+import Slider from '../components/slider/slider';
 
 Vue.use(Router);
 
@@ -24,5 +26,7 @@ export default new Router({
         {path: '/tooltip', component: Tooltip},
         {path: '/message', component: Message},
         {path: '/tag', component: Tag},
+        {path: '/fullpage', component: FullPage},
+        {path: '/slider', component: Slider},
     ]
 })

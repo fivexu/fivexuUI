@@ -4,7 +4,7 @@
             <fx-menu :data="menuList"></fx-menu>
         </nav>
         <div class="content">
-            <router-view/>
+            <router-view style="width: 100%;height: 100%;"></router-view>
         </div>
     </div>
 </template>
@@ -33,6 +33,9 @@
 
 <style scoped lang="less">
     #app {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
         nav {
             position: fixed;
             width: 200px;
@@ -45,7 +48,7 @@
             width: 100%;
             height: 100%;
             box-sizing: border-box;
-            padding: 50px 0 0 220px;
+            padding: 0 0 0 220px;
         }
     }
 </style>

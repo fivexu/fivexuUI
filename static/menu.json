@@ -34,5 +34,13 @@
   {
     "link": "/tag",
     "title": "标签"
+  },
+  {
+    "link": "/fullpage",
+    "title": "整屏滚动"
+  },
+  {
+    "link": "/slider",
+    "title": "轮播图"
   }
 ]

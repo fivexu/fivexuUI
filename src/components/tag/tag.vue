@@ -16,7 +16,12 @@
             </li>
             <li>
                 <h3>参数 close 关闭按钮 格式 Boolean 默认 false</h3>
-                <fx-tag :close="true">normal</fx-tag>
+                <fx-tag :close="true">标签一</fx-tag>
+                <fx-tag :close="true">标签二</fx-tag>
+                <fx-tag :close="true">标签三</fx-tag>
+                <fx-tag :close="true">标签四</fx-tag>
+                <fx-tag :close="true">标签五</fx-tag>
+                <fx-tag :close="true">标签六</fx-tag>
             </li>
         </ul>
     </div>
