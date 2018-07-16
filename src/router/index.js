@@ -18,6 +18,7 @@ Vue.use(Router);
 
 export default new Router({
     routes: [
+        {path: '/', redirect: '/button'},
         {path: '/button', component: Button},
         {path: '/input', component: Input},
         {path: '/radio', component: Radio},

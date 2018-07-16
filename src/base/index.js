@@ -17,7 +17,8 @@ import FxFullPage from './fullpage/fullpage'
 import Slider from './slider/slider'
 import ScrollBar from './scrollBar/scrollBar'
 
-import './util/style/componets.less'
+import './util/style/componets.less';
+import './util/font/iconfont.css';
 
 let global = {
     install: function () {
