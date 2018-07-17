@@ -32,8 +32,20 @@
                                :arrowsShow="arrowsShow"
                                :dotsShow="dotsShow"
                                :hoverStop="hoverStop">
-                        <div v-for="item in sliderList">
-                            <img :src="item.src">
+                        <div>
+                            <img src="../../../static/slider01.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider02.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider03.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider04.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider05.jpg">
                         </div>
                     </fx-slider>
                 </div>
@@ -43,8 +55,20 @@
                     <h3>sliderType  类型  String   当前slide</h3>
                     <fx-slider :data="sliderList"
                                :sliderType="'slide'">
-                        <div v-for="item in sliderList">
-                            <img :src="item.src">
+                        <div>
+                            <img src="../../../static/slider01.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider02.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider03.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider04.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider05.jpg">
                         </div>
                     </fx-slider>
                 </div>
@@ -54,8 +78,20 @@
                     <h3>sliderType  类型  String   当前fade</h3>
                     <fx-slider :data="sliderList"
                                :sliderType="'fade'">
-                        <div v-for="item in sliderList">
-                            <img :src="item.src">
+                        <div>
+                            <img src="../../../static/slider01.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider02.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider03.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider04.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider05.jpg">
                         </div>
                     </fx-slider>
                 </div>
@@ -66,8 +102,20 @@
                     <fx-slider :data="sliderList"
                                :hidden="false"
                                :sliderType="'3d'">
-                        <div v-for="item in sliderList">
-                            <img :src="item.src">
+                        <div>
+                            <img src="../../../static/slider01.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider02.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider03.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider04.jpg">
+                        </div>
+                        <div>
+                            <img src="../../../static/slider05.jpg">
                         </div>
                     </fx-slider>
                 </div>
@@ -117,6 +165,11 @@
                 text-align: center;
                 width: 500px;
                 margin: 0 auto;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    float: left;
+                }
             }
         }
     }
