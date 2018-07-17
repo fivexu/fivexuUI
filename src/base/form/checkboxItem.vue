@@ -16,21 +16,22 @@
     export default {
         extends: GlobalForm,
         props: {
-            label: {
+            label: {  // 需要返回的数据
                 type: String | Number | Object,
                 default: ''
             },
-            checked: {
+            checked: { // 是否选中
                 type: Boolean,
                 default: false
             }
         },
         data() {
             return {
-                currentChecked: false
+                currentChecked: false  // 当前选中状态
             }
         },
         methods: {
+            // item点击,开关之间来回切换 并会掉到父级
             checkboxItemClick() {
                 if (this.isDisabled()) {
                     return;
@@ -40,6 +41,7 @@
             }
         },
         mounted() {
+            // 初始化时,将数据状态回调给父级
             this.currentChecked = this.checked ? this.checked : false;
             this.updateModel({value: this.label, checked: this.currentChecked})
         }

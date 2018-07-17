@@ -25,6 +25,10 @@
                         "title": "输入框"
                     },
                     {
+                        "link": "/select",
+                        "title": "下拉选择"
+                    },
+                    {
                         "link": "/radio",
                         "title": "单选"
                     },

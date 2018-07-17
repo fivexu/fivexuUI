@@ -28,10 +28,11 @@
         },
         data() {
             return {
-                currentIndex: this.value ? this.value : 0
+                currentIndex: this.value ? Number(this.value) : 0  // v-mode是否有默认选中值
             }
         },
         methods: {
+            // 单选切换
             radioClick(item) {
                 if (item.disable ? item.disable : false) {
                     return

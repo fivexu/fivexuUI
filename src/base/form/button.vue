@@ -13,25 +13,27 @@
     export default {
         extends: GlobalForm,
         props: {
-            text: {
+            text: {  // 显示文字
                 type: String,
                 default: '确认'
             },
-            fill: {
+            fill: {  // 铺满背景色
                 type: Boolean,
                 default: false
             },
-            radius: {
+            radius: {  // 圆角
                 type: Boolean,
                 default: false
             }
         },
         methods: {
+            // button点击事件 在没有disable时 回调clickEvk事件
             clickEvt(ev) {
                 if (!this.isDisabled()) {
                     this.emitEvent({action: 'click', ev});
                 }
             },
+            // 判断是否存在slot插槽,用户是否自定义样式,存在时不显示text内容,仅显示插槽内容
             hasSlot() {
                 return this.$slots.default
             }

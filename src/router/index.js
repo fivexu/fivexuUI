@@ -13,6 +13,7 @@ import Tag from '../components/tag/tag';
 import FullPage from '../components/fullpage/fullpage';
 import Slider from '../components/slider/slider';
 import ScrollBar from '../components/scrollBar/scrollBar';
+import Select from '../components/select/select';
 
 Vue.use(Router);
 
@@ -31,5 +32,6 @@ export default new Router({
         {path: '/fullpage', component: FullPage},
         {path: '/slider', component: Slider},
         {path: '/scrollBar', component: ScrollBar},
+        {path: '/select', component: Select},
     ]
 })

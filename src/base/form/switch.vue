@@ -36,6 +36,7 @@
             })
         },
         methods: {
+            // 点击事件  回调状态和点击事件
             switchClick() {
                 this.switchType = !this.switchType;
                 setTimeout(() => {
@@ -44,11 +45,13 @@
                     this.$emit('clickEvt', this.switchType);
                 });
             },
+            // 初始化开关按钮的宽度,根据用户填写的文字长度,自适应 最小24px 最大不限制
             _initSwitchWidth() {
                 let open = this.$refs.openText ? this.$refs.openText.offsetWidth : 0;
                 let close = this.$refs.closeText ? this.$refs.closeText.offsetWidth : 0;
                 let dot = this.$refs.dot.offsetWidth;
-                this.$refs.switchDom.style.width = `${open + close + dot * 2}px`
+                let width = open + close + dot * 2;
+                this.$refs.switchDom.style.width = `${width <= 24 ? 24 : width}px`
             }
         }
     }
@@ -105,7 +108,7 @@
             &.radius {
                 border-radius: @height-mini/2;
                 .dot {
-                    width: @height-mini - 2!important;
+                    width: @height-mini - 2 !important;
                     border-radius: 50%;
                 }
             }
@@ -147,7 +150,7 @@
             &.radius {
                 border-radius: @height-normal/2;
                 .dot {
-                    width: @height-normal - 2!important;
+                    width: @height-normal - 2 !important;
                     border-radius: 50%;
                 }
             }

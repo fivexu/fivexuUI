@@ -3,7 +3,7 @@
         <input :class="[size,type,{'disable':isDisabled()},{clear:clear&&inputValue!==''}]"
                :placeholder="placeholder"
                :disabled="isDisabled()"
-               :readonly="isDisabled()"
+               :readonly="readOnly"
                v-model="inputValue"
                type="text"/>
         <div class="icon" v-if="clear&&inputValue!==''">
@@ -19,7 +19,7 @@
         extends: globalForm,
         data() {
             return {
-                inputValue: this.value
+                inputValue: this.value  // v-mode默认值
             }
         },
         props: {
@@ -33,11 +33,13 @@
             }
         },
         methods: {
+            // 清空数据
             clearInputValue() {
                 this.inputValue = ''
             }
         },
         watch: {
+            //  当数据变化时,回调变化事件
             inputValue(val, oldVal) {
                 this.updateModel(val);
                 this.emitEvent({action: 'change', val, oldVal});
@@ -114,8 +116,11 @@
                 outline: 0;
                 .box-shadow(inset 0 1px 1px 0 @input-inset-shadow, 0 0 8px 0 @input-outset-shadow-primary);
             }
-            &[readonly], &[disabled] {
+            &[disabled] {
                 background-color: @input-disable;
+                .box-shadow(inset 0 1px 1px 0 rgba(0, 0, 0, .075))
+            }
+            &[readonly] {
                 .box-shadow(inset 0 1px 1px 0 rgba(0, 0, 0, .075))
             }
         }

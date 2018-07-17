@@ -34,7 +34,7 @@
 @bg-black: #000; // 背景色  黑色
 
 // 高度样式
-@height-min: 10px; // 超小模块
+@height-min: 12px; // 超小模块
 @height-mini: 24px; // 小模块
 @height-normal: 32px; // 正常模块
 @height-large: 40px; // 大模块
@@ -225,6 +225,13 @@
     opacity: 0;
     transition: all 0.3s;
   }
+}
+
+// 三角形
+.triangle(@border-color:#80848f) {
+  border: 6px solid transparent;
+  border-top-color: @border-color;
+  transform-origin: center top 3px;
 }
 
 .position-center() {

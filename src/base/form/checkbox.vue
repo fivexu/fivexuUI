@@ -18,6 +18,7 @@
     export default {
         extends: GlobalForm,
         props: {
+            // 传入的需要排版数据
             data: {
                 type: Array,
                 default: () => {
@@ -27,15 +28,17 @@
         },
         data() {
             return {
-                checkboxModel: '',
-                checkboxArr: [],
+                checkboxModel: '', // 双向绑定checkboxItem中的数据
+                checkboxArr: [], // 声明一个空数组保存需要回调绑定的数据
             }
         },
         methods: {
             _setCheckArr(val) {
+                // 判断是否有选中数据,没有直接push
                 if (!this.checkboxArr.length) {
                     this.checkboxArr.push(val);
                 } else {
+                    // 当有选中数据是,判断是否重复,重复则不增加数据,否则增加一条数据
                     let off = false;
                     this.checkboxArr.forEach((item, index) => {
                         if (item.value === val.value && val.checked === false) {
@@ -49,6 +52,7 @@
                         this.checkboxArr.push(val)
                     }
                 }
+                // 重组数据,仅回调返回用户传入的label值
                 let arr = [];
                 this.checkboxArr.forEach(item => {
                     arr.push(item);
@@ -56,6 +60,7 @@
                 return arr
             },
             _initCheckArr() {
+                // 根据用户传入数据,初始化返回数据
                 this.checkboxArr = [];
                 this.data.forEach(item => {
                     if (item.checked) {
@@ -68,6 +73,8 @@
                 this._setUpdateModel(this.checkboxArr);
             },
             _setUpdateModel(arr) {
+                // 把checkboxArr数据和传入数据对比,返回选中的对应数据
+                // 处理为 value中仅返回用户传入的label值,label中返回选中的整条数据,这样可以根据用户需求自行拿数据
                 let newArr = [];
                 let value = [];
                 this.data.forEach(dataItem => {
@@ -84,6 +91,7 @@
                 if (!this.hasSlot()) {
                     return
                 }
+                // 当用户使用插槽模式时,根据don节点获取对应数据
                 setTimeout(() => {
                     let input = this.$refs.checkbox.getElementsByClassName('fivexu_checkbox_item');
                     let arr = [];
@@ -109,6 +117,9 @@
                 }
                 this.checkboxArr = this._setCheckArr(val);
                 this._setUpdateModel(this.checkboxArr);
+            },
+            data() {
+                this._initCheckArr();
             }
         },
         components: {
