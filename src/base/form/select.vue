@@ -3,7 +3,7 @@
         <span :class="{ac:selectListShow}"></span>
         <fx-input :readOnly="true" v-model="selectValue"></fx-input>
         <transition name="top">
-            <ul class="select_list" v-if="selectListShow">
+            <ul class="select_list" ref="selectList" v-if="selectListShow">
                 <li v-for="item in data"
                     @click.stop="selectListClick(item)">
                     {{item.label}}
@@ -34,8 +34,18 @@
         },
         methods: {
             selectClick() {
-                this.selectListShow = !this.selectListShow
+                this.selectListShow = true;
+            },
+            selectListClick(item) {
+                console.log(item)
             }
+        },
+        mounted() {
+            this.$nextTick(() => {
+                this.clickCloseDom(this.$refs.selectList, () => {
+                    this.selectListShow = false;
+                })
+            })
         },
         components: {
             'fx-input': Input
