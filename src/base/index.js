@@ -6,6 +6,7 @@ import tooltip from './tooltip/tooltipClass.js';
 import Page from './page/page'
 import FxButton from './form/button'
 import FxInput from './form/input'
+import FxInputImg from './form/inputImg'
 import FxSelect from './form/select'
 import FxTag from './tag/tag'
 import FxRadio from './form/radio'
@@ -28,6 +29,7 @@ let global = {
 
         Vue.component('fx-button', FxButton);
         Vue.component('fx-input', FxInput);
+        Vue.component('fx-input-img', FxInputImg);
         Vue.component('fx-select', FxSelect);
         Vue.component('fx-tag', FxTag);
         Vue.component('fx-radio', FxRadio);

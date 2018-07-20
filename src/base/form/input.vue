@@ -52,7 +52,7 @@
     @import "../util/style/common.less";
 
     .input {
-        width: 200px;
+        width: @input-width;
         position: relative;
         display: inline-block;
         &.mini {

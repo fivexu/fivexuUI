@@ -8,7 +8,6 @@
 
 <script>
     export default {
-        name: "menu",
         props: {
             data: {
                 type: Array,

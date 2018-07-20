@@ -29,7 +29,6 @@
                     ev.stopPropagation();
                     ev.preventDefault();
                     if (element !== ev.target && !el.contains(element)) {
-                        console.log(element);
                         callback();
                     }
                 })

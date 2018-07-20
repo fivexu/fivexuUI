@@ -1,7 +1,7 @@
 <template>
     <div class="select" @click.stop="selectClick">
         <span :class="{ac:selectListShow}"></span>
-        <fx-input :readOnly="true" v-model="selectValue"></fx-input>
+        <fx-input v-model="selectValue"></fx-input>
         <transition name="top">
             <ul class="select_list" ref="selectList" v-if="selectListShow">
                 <li v-for="item in data"
@@ -18,7 +18,6 @@
     import Input from './input'
 
     export default {
-        name: 'select',
         extends: GlobalForm,
         props: {
             data: {
@@ -28,8 +27,9 @@
         },
         data() {
             return {
-                selectValue: '顶顶顶顶',
-                selectListShow: false
+                selectValue: '',
+                selectListShow: false,
+                readonly: true,
             }
         },
         methods: {
@@ -37,7 +37,11 @@
                 this.selectListShow = true;
             },
             selectListClick(item) {
-                console.log(item)
+                this.readonly = false;
+                this.selectValue = item.label;
+                setTimeout(() => {
+                    this.readonly = true;
+                })
             }
         },
         mounted() {

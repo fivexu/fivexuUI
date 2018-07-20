@@ -17,7 +17,6 @@
     import GlobalForm from '../global/global-form.vue'
 
     export default {
-        name: 'switch',
         extends: GlobalForm,
         props: {
             radius: {
