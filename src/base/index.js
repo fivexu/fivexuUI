@@ -18,6 +18,7 @@ import FxMenu from './menu/menu'
 import FxFullPage from './fullpage/fullpage'
 import Slider from './slider/slider'
 import ScrollBar from './scrollBar/scrollBar'
+import TimeLine from './timeLine/timeLine'
 
 import './util/style/componets.less';
 import './util/font/iconfont.css';
@@ -41,6 +42,7 @@ let global = {
         Vue.component('fx-slider', Slider);
         Vue.component('fx-slider', Slider);
         Vue.component('fx-scroll-bar', ScrollBar);
+        Vue.component('fx-time-line', TimeLine);
 
         Vue.directive('tooltip', tooltip);
     }

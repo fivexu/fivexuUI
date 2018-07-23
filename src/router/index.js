@@ -14,6 +14,7 @@ import FullPage from '../components/fullpage/fullpage';
 import Slider from '../components/slider/slider';
 import ScrollBar from '../components/scrollBar/scrollBar';
 import Select from '../components/select/select';
+import TimeLine from '../components/timeLine/timeLine';
 
 Vue.use(Router);
 
@@ -33,5 +34,6 @@ export default new Router({
         {path: '/slider', component: Slider},
         {path: '/scrollBar', component: ScrollBar},
         {path: '/select', component: Select},
+        {path: '/timeLine', component: TimeLine},
     ]
 })
