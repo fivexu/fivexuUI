@@ -1,6 +1,12 @@
 <template>
     <div class="timeLine">
-        <fx-time-line></fx-time-line>
+        <fx-time-line>
+            <div slot="left"><</div>
+            <ul class="list" slot="content">
+                <li v-for="item in timeLineData">{{item.title}}</li>
+            </ul>
+            <div slot="right">></div>
+        </fx-time-line>
     </div>
 </template>
 
@@ -31,5 +37,12 @@
 </script>
 
 <style scoped lang="less">
-
+    .list {
+        > li {
+            padding: 0 30px;
+            border: 1px solid #ccc;
+            height: 30px;
+            line-height: 30px;
+        }
+    }
 </style>
