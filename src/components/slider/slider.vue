@@ -52,7 +52,7 @@
             </li>
             <li>
                 <div class="box">
-                    <h3>sliderType  类型  String   当前slide</h3>
+                    <h3>sliderType 类型 String 当前slide</h3>
                     <fx-slider :data="sliderList"
                                :sliderType="'slide'">
                         <div>
@@ -75,7 +75,7 @@
             </li>
             <li>
                 <div class="box">
-                    <h3>sliderType  类型  String   当前fade</h3>
+                    <h3>sliderType 类型 String 当前fade</h3>
                     <fx-slider :data="sliderList"
                                :sliderType="'fade'">
                         <div>
@@ -98,7 +98,7 @@
             </li>
             <li>
                 <div class="box" style="width: 1000px;">
-                    <h3>sliderType  类型  String   当前3d</h3>
+                    <h3>sliderType 类型 String 当前3d</h3>
                     <fx-slider :data="sliderList"
                                :hidden="false"
                                :sliderType="'3d'">
@@ -120,28 +120,58 @@
                     </fx-slider>
                 </div>
             </li>
+            <li>
+                <div class="box" style="width: 1000px;">
+                    <h3>sliderType 类型 String 当前3d</h3>
+                    <fx-slider :data="sliderList" :sliderType="'mosaic'" @currentIndex="getCurrentIndex">
+                        <div style="width: 100%;height: 100%;" v-for="(item,index) in sliderList">
+                            <img :src="currentSrc">
+                            <fx-mosaic :playTime="1000"
+                                       :playPath="'right'"
+                                       :playStart="'start'"
+                                       v-if="currentIndex===index"
+                                       :img="item.src"></fx-mosaic>
+                        </div>
+                    </fx-slider>
+                </div>
+            </li>
         </ul>
     </div>
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default {
         name: "slider",
         data() {
             return {
+                currentIndex: 0,
+                currentSrc: '../../../static/slider05.jp',
                 autoPlay: true,
                 time: 2000,
                 arrowsShow: true,
                 dotsShow: true,
                 hoverStop: true,
-                sliderList: [
-                    {src: '../../../static/slider01.jpg'},
-                    {src: '../../../static/slider02.jpg'},
-                    {src: '../../../static/slider03.jpg'},
-                    {src: '../../../static/slider04.jpg'},
-                    {src: '../../../static/slider05.jpg'},
-                ]
+                sliderList: []
             }
+        },
+        methods: {
+            getCurrentIndex(index) {
+                console.log(index);
+                this.currentIndex = index
+                if (this.sliderList[index - 1]) {
+                    this.currentSrc = this.sliderList[index - 1].src;
+                } else {
+                    this.currentSrc = this.sliderList[this.sliderList.length - 1].src;
+                }
+            }
+        },
+        mounted() {
+            axios({url: 'http://btyyftp.gotoip3.com/bt/public/index.php/portal/api/index'})
+              .then(res => {
+                  this.sliderList = res.data.banner
+              })
         }
     }
 </script>
@@ -161,11 +191,11 @@
             .right {
                 width: 500px;
             }
-            .box{
+            .box {
                 text-align: center;
                 width: 500px;
                 margin: 0 auto;
-                img{
+                img {
                     width: 100%;
                     height: 100%;
                     float: left;

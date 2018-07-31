@@ -17,6 +17,7 @@ import FxMenu from './menu/menu'
 
 import FxFullPage from './fullpage/fullpage'
 import Slider from './slider/slider'
+import Mosaic from './mosaic/mosaic'
 import ScrollBar from './scrollBar/scrollBar'
 import TimeLine from './timeLine/timeLine'
 
@@ -40,7 +41,7 @@ let global = {
         Vue.component('fx-menu', FxMenu);
         Vue.component('fx-full-page', FxFullPage);
         Vue.component('fx-slider', Slider);
-        Vue.component('fx-slider', Slider);
+        Vue.component('fx-mosaic', Mosaic);
         Vue.component('fx-scroll-bar', ScrollBar);
         Vue.component('fx-time-line', TimeLine);
 
