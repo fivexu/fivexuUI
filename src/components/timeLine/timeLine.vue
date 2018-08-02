@@ -20,20 +20,18 @@
             }
         },
         mounted() {
-            setTimeout(() => {
-                this.timeLineData = [
-                    {title: 2010},
-                    {title: 2011},
-                    {title: 2012},
-                    {title: 2013},
-                    {title: 2014},
-                    {title: 2015},
-                    {title: 2016},
-                    {title: 2017},
-                    {title: 2018},
-                    {title: 2019},
-                ];
-            }, 1000)
+            this.timeLineData = [
+                {title: 2010},
+                {title: 2011},
+                {title: 2012},
+                {title: 2013},
+                {title: 2014},
+                {title: 2015},
+                {title: 2016},
+                {title: 2017},
+                {title: 2018},
+                {title: 2019},
+            ];
         }
     }
 </script>

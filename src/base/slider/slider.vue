@@ -239,29 +239,31 @@
                 })
             },
             prev(index) {
-                clearInterval(this.timer)
-                index--
+                clearInterval(this.timer);
+                index--;
                 if (index < 0) {
                     index = this.$refs.slide.children.length - 1
                 }
-                this.currentIndex = index
-                this._setTabsType()
-                this._playTabs()
+                this.currentIndex = index;
+                this.$emit('prevClick', index);
+                this._setTabsType();
+                this._playTabs();
             },
             next(index) {
-                clearInterval(this.timer)
-                index++
+                clearInterval(this.timer);
+                index++;
                 if (index >= this.$refs.slide.children.length) {
                     index = 0
                 }
-                this.currentIndex = index
-                this._setTabsType()
-                this._playTabs()
+                this.currentIndex = index;
+                this.$emit('nextClick', index);
+                this._setTabsType();
+                this._playTabs();
             },
             mouseEnter(index) {
-                clearInterval(this.timer)
-                this.currentIndex = index
-                this._setTabsType()
+                clearInterval(this.timer);
+                this.currentIndex = index;
+                this._setTabsType();
             },
             wrapperEnter() {
                 if (this.hoverStop) {
@@ -330,9 +332,9 @@
     }
 
     .wrapper img {
-        display: block;
         width: 100%;
         height: 100%;
+        float: left;
     }
 
     .wrapper:hover .switch {

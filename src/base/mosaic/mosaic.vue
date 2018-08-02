@@ -15,7 +15,7 @@
       },
       playTime: {
         type: Number,
-        default: 3000
+        default: 1000
       },
       playPath: {
         type: String,

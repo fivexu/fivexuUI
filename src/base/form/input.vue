@@ -5,7 +5,7 @@
                :disabled="isDisabled()"
                :readonly="readOnly"
                v-model="inputValue"
-               type="text"/>
+               :type="inputType"/>
         <div class="icon" v-if="clear&&inputValue!==''">
             <span @click.stop="clearInputValue"><i class="iconfont icon-close-radius"></i></span>
         </div>
@@ -30,6 +30,10 @@
             clear: {
                 type: Boolean,
                 default: false
+            },
+            inputType: {
+                type: String | Number,
+                default: 'text'
             }
         },
         methods: {
@@ -41,7 +45,7 @@
         watch: {
             //  当数据变化时,回调变化事件
             inputValue(val, oldVal) {
-                this.updateModel(val);
+                this.updateModel(this.inputType === 'number' ? Number(val) : val);
                 this.emitEvent({action: 'change', val, oldVal});
             }
         }
@@ -140,8 +144,8 @@
             span {
                 color: #ccc;
                 .position-center;
-                i{
-                    font-size: 30px!important;
+                i {
+                    font-size: 30px !important;
                 }
             }
         }
