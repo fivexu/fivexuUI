@@ -12,6 +12,9 @@
             <li>
                 <h2>背景搭配</h2>
                 <div class="box">
+                    <div class="bg">
+                        <img src="../../../static/star.jpg" alt="">
+                    </div>
                     <canvas id="star"></canvas>
                 </div>
             </li>
@@ -65,10 +68,33 @@
             height: 350px;
             margin-bottom: 30px;
             border-bottom: 1px solid #ccc;
+            canvas{
+                width: 1000px;
+                height: 300px;
+            }
             .box {
                 width: 600px;
                 height: 300px;
-                background: url("../../../static/star.jpg") no-repeat 0 0;
+                position: relative;
+                .bg{
+                    width: 600px;
+                    height: 300px;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    z-index: 1;
+                    font-size: 0;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                canvas{
+                    width: 600px;
+                    height: 300px;
+                    position: relative;
+                    z-index: 10;
+                }
             }
             span {
                 cursor: pointer;
