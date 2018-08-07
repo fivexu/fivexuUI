@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Loading from './loading/loadingClass.js';
 import Message from './message/messageClass.js';
-import tooltip from './tooltip/tooltipClass.js';
+import Tooltip from './tooltip/tooltipClass.js';
+import DotRun from './dotRun/dotRun.js';
 
 import Page from './page/page'
 import FxButton from './form/button'
@@ -28,6 +29,7 @@ let global = {
     install: function () {
         Loading.initLoading(Vue);
         Message.initMessage(Vue);
+        DotRun.initDotRun(Vue);
 
         Vue.component('fx-button', FxButton);
         Vue.component('fx-input', FxInput);
@@ -45,7 +47,7 @@ let global = {
         Vue.component('fx-scroll-bar', ScrollBar);
         Vue.component('fx-time-line', TimeLine);
 
-        Vue.directive('tooltip', tooltip);
+        Vue.directive('tooltip', Tooltip);
     }
 };
 

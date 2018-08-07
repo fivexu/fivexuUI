@@ -69,9 +69,13 @@
                         "title": "超出滚动条"
                     },
                     {
-                        "link": "/timeLine",
-                        "title": "时间轴"
-                    }
+                        "link": "/dotRun",
+                        "title": "粒子动点"
+                    },
+                    // {
+                    //     "link": "/timeLine",
+                    //     "title": "时间轴"
+                    // }
                 ]
             }
         }

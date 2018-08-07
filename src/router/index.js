@@ -15,6 +15,7 @@ import Slider from '../components/slider/slider';
 import ScrollBar from '../components/scrollBar/scrollBar';
 import Select from '../components/select/select';
 import TimeLine from '../components/timeLine/timeLine';
+import DotRun from '../components/dotRun/dotRun';
 
 Vue.use(Router);
 
@@ -35,5 +36,6 @@ export default new Router({
         {path: '/scrollBar', component: ScrollBar},
         {path: '/select', component: Select},
         {path: '/timeLine', component: TimeLine},
+        {path: '/dotRun', component: DotRun},
     ]
 })
