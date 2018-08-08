@@ -51,12 +51,15 @@
                 ArcColor: '#fff',
                 speedX: 1,
                 speedY: 1,
-            })
+            });
             this.$fivexu.dotRun('#hover', {
-                isHover: true,
-                ArcColor: `rgb(${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)})`,
-                lineColor: `rgb(${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)})`,
-                mouseColor: `rgb(${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)})`
+                dotsNumber: 1,
+                speedX: 2,
+                speedY: 1,
+                isHover: false,
+                ArcColor: '#f69',
+                lineColor: `#00f`,
+                mouseColor: `#f00`
             })
         }
     }
@@ -68,7 +71,7 @@
             height: 350px;
             margin-bottom: 30px;
             border-bottom: 1px solid #ccc;
-            canvas{
+            canvas {
                 width: 1000px;
                 height: 300px;
             }
@@ -76,7 +79,7 @@
                 width: 600px;
                 height: 300px;
                 position: relative;
-                .bg{
+                .bg {
                     width: 600px;
                     height: 300px;
                     position: absolute;
@@ -84,12 +87,12 @@
                     top: 0;
                     z-index: 1;
                     font-size: 0;
-                    img{
+                    img {
                         width: 100%;
                         height: 100%;
                     }
                 }
-                canvas{
+                canvas {
                     width: 600px;
                     height: 300px;
                     position: relative;

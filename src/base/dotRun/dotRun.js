@@ -185,10 +185,10 @@ class DotRun {
 
     // 绘制点
     createArc(x, y, cxt, color = this.canvasSet.ArcColor) {
-        cxt.beginPath()
-        cxt.arc(x, y, this.canvasSet.dotsRadius, 0, 2 * Math.PI)
-        cxt.fillStyle = color
-        cxt.fill()
+        cxt.beginPath();
+        cxt.arc(x, y, this.canvasSet.dotsRadius, 0, 2 * Math.PI);
+        cxt.fillStyle = color;
+        cxt.fill();
         cxt.closePath()
     }
 
