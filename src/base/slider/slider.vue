@@ -395,6 +395,7 @@
         position: absolute;
         top: 0;
         bottom: 0;
+        z-index: 500;
         margin: auto 0;
         font-size: 40px;
         opacity: 0;
@@ -430,7 +431,7 @@
         right: 0;
         bottom: 20px;
         margin: 0 auto;
-        z-index: 50;
+        z-index: 500;
     }
 
     .wrapper .dots .dot {

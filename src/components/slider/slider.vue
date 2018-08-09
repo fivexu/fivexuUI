@@ -153,7 +153,6 @@
                 <div class="box" style="width: 1000px;">
                     <fx-slider :data="sliderList"
                                :sliderType="'mosaic'"
-                               :time="1000000"
                                @prevClick="prevClick"
                                @nextClick="nextClick"
                                @currentIndex="getCurrentIndex">

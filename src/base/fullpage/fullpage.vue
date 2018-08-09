@@ -20,6 +20,9 @@
 </template>
 
 <script type="text/ecmascript-6">
+    import Util from '../util/js/util';
+
+    const Transform = Util.prefixStyle('transform');
     export default {
         props: {
             isScrollBar: {
@@ -112,7 +115,7 @@
                 }
                 if (!this.isScrollBar) {
                     this.$refs.fullPage.style.overflow = `hidden`;
-                    this.$refs.translatePage.style.webkitTransform = `translate3d(0px,0px,0px)`;
+                    this.$refs.translatePage.style[Transform] = `translate3d(0px,0px,0px)`;
                     this.$emit('maxPage', children.length);
                     if (!this.isDots) {
                         return;
@@ -186,22 +189,22 @@
             translateTo(y, time = this.scrollTime) {
                 y = document.documentElement.clientHeight * y
                 let timer = null
-                let n = Math.abs(parseInt(this.$refs.translatePage.style.webkitTransform.replace('translate3d(0px, ', '').replace('px, 0px)')))
+                let n = Math.abs(parseInt(this.$refs.translatePage.style[Transform].replace('translate3d(0px, ', '').replace('px, 0px)')))
                 clearInterval(timer)
                 timer = setInterval(() => {
                     if (n <= y) {
                         n += document.documentElement.clientHeight * 30 / time
-                        this.$refs.translatePage.style.webkitTransform = `translate3d(0,${-n}px,0)`
+                        this.$refs.translatePage.style[Transform] = `translate3d(0,${-n}px,0)`
                         if (n >= y) {
-                            this.$refs.translatePage.style.webkitTransform = `translate3d(0,${-y}px,0)`
+                            this.$refs.translatePage.style[Transform] = `translate3d(0,${-y}px,0)`
                             clearInterval(timer)
                         }
                     }
                     if (n > y) {
                         n -= document.documentElement.clientHeight * 30 / time
-                        this.$refs.translatePage.style.webkitTransform = `translate3d(0,${-n}px,0)`
+                        this.$refs.translatePage.style[Transform] = `translate3d(0,${-n}px,0)`
                         if (n <= y) {
-                            this.$refs.translatePage.style.webkitTransform = `translate3d(0,${-y}px,0)`
+                            this.$refs.translatePage.style[Transform] = `translate3d(0,${-y}px,0)`
                             clearInterval(timer)
                         }
                     }
