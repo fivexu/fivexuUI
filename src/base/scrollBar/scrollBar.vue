@@ -43,6 +43,9 @@
         },
         methods: {
             setBarHeight() {
+                if (!this.$refs.content || !this.$refs.content.children.length || !this.$refs.scrollBar) {
+                    return;
+                }
                 let disHeight = this.$refs.content.children[0].offsetHeight - this.$refs.scrollBar.offsetHeight
                 let barHeight = this.$refs.scrollBar.offsetHeight - disHeight
                 if (disHeight >= 0) {
@@ -178,24 +181,28 @@
                 this.touchTimer = setTimeout(() => {
                     this.barShow = false
                 }, 1000)
+            },
+            _initScrollBar() {
+                clearInterval(this.setTimer);
+                if (!this.$refs.scrollBar || !this.$refs.bar) {
+                    clearInterval(this.setTimer)
+                    return;
+                }
+                this.setTimer = setInterval(() => {
+                    this.setBarHeight();
+                    setTimeout(() => {
+                        clearInterval(this.setTimer)
+                    }, 3000);
+                    if (this.$refs.bar.offsetHeight >= 20) {
+                        clearInterval(this.setTimer)
+                    }
+                }, 30);
             }
         },
         mounted() {
-            if (!this.$refs.scrollBar) {
-                return
-            }
-            clearInterval(this.setTimer)
-            this.setTimer = setInterval(() => {
-                this.setBarHeight()
-                setTimeout(() => {
-                    clearInterval(this.setTimer)
-                }, 3000)
-                if (this.$refs.bar.offsetHeight >= 20) {
-                    clearInterval(this.setTimer)
-                }
-            }, 30)
+            this._initScrollBar();
             document.body.addEventListener('mouseup', () => {
-                this.mouseDowned = false
+                this.mouseDowned = false;
             })
         }
     }

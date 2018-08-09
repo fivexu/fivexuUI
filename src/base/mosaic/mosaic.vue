@@ -119,7 +119,7 @@
                 }
             },
             _play() {
-                if (!this.autoPlay) {
+                if (!this.autoPlay || !this.$refs.item.length) {
                     return
                 }
                 let start = 0;

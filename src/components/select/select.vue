@@ -1,6 +1,7 @@
 <template>
     <div class="select">
-        <fx-select :data="selectData"></fx-select>
+        <fx-select :data="selectData" v-model="selectValue"></fx-select>
+        {{selectValue}}
     </div>
 </template>
 
@@ -14,7 +15,8 @@
                     {label: '选项三', value: 3, id: 3},
                     {label: '选项四', value: 4, id: 4},
                     {label: '选项五', value: 5, id: 5},
-                ]
+                ],
+                selectValue: 3
             }
         }
     }

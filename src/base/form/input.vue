@@ -47,6 +47,9 @@
             inputValue(val, oldVal) {
                 this.updateModel(this.inputType === 'number' ? Number(val) : val);
                 this.emitEvent({action: 'change', val, oldVal});
+            },
+            value(val, oldVal) {
+                this.inputValue = val;
             }
         }
     }
@@ -80,6 +83,8 @@
             background-color: @input-bg;
             border-radius: @input-border-radius;
             border: 1px solid @border-color;
+            position: absolute;
+            z-index: 10;
             &.clear {
                 padding: 0 @padding-input + 15 0 @padding-input;
             }
@@ -136,6 +141,7 @@
             right: 0;
             top: 0;
             bottom: 0;
+            z-index: 20;
             margin: auto 0;
             cursor: pointer;
             &:hover span {
