@@ -98,8 +98,11 @@
 // select
 @select-bg: #fff; // select 下拉框背景色
 @select-hover-bg: #f0f0f0; // select 下拉框hover
-@select-ac-bg: #2d8cf0e6; // select 下拉框选中背景色
-@select-ac-color: #fff; // select 下拉框选中字体色
+@select-ac-bg: #fff; // select 下拉框选中背景色
+@select-ac-color: #2d8cf0; // select 下拉框选中字体色
+@select-multiple-bg: #f7f7f7; // select 下拉多选标签背景色
+@select-multiple-color: #333; // select  下拉多线标签字体色
+@select-multiple-border: #e8eaec; // select  下拉选多标签边框
 
 /**  基础主题 方法管理  **/ // 边框线.border(@color:@border-color;
 .border(@color:@border-color,@border: 1px,@type: solid) {
@@ -117,6 +120,15 @@
   color: @color !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+// 清除浮动
+.clearfix:after {
+  content: "";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
 }
 
 // 单行文字超出隐藏
@@ -165,7 +177,7 @@
     opacity: 0;
   }
   &.left-enter-active {
-    .transition(all 0.3s ease);
+    .transition(all 0.1s ease);
   }
   &.left-leave {
     .transform(translateX(0));
@@ -173,7 +185,7 @@
   &.left-leave-active {
     .transform(translateX(100%));
     opacity: 0;
-    .transition(all 0.3s ease)
+    .transition(all 0.1s ease)
   }
 }
 
@@ -184,7 +196,7 @@
     opacity: 0;
   }
   &.right-enter-active {
-    .transition(all 0.3s ease)
+    .transition(all 0.1s ease)
   }
   &.right-leave {
     .transform(translateX(0));
@@ -192,7 +204,7 @@
   &.right-leave-active {
     .transform(translateX(-100%));
     opacity: 0;
-    .transition(all 0.3s ease)
+    .transition(all 0.1s ease)
   }
 }
 
@@ -203,7 +215,7 @@
     opacity: 0;
   }
   &.top-enter-active {
-    .transition(all 0.3s ease)
+    .transition(all 0.1s ease)
   }
   &.top-leave {
     .transform(translateY(0));
@@ -211,7 +223,7 @@
   &.top-leave-active {
     .transform(translateY(100%));
     opacity: 0;
-    .transition(all 0.3s ease)
+    .transition(all 0.1s ease)
   }
 }
 
@@ -222,7 +234,7 @@
     opacity: 0;
   }
   &.bottom-enter-active {
-    .transition(all 0.3s ease)
+    .transition(all 0.1s ease)
   }
   &.bottom-leave {
     .transform(translateY(0));
@@ -230,7 +242,7 @@
   &.bottom-leave-active {
     .transform(translateY(-100%));
     opacity: 0;
-    .transition(all 0.3s ease)
+    .transition(all 0.1s ease)
   }
 }
 
@@ -241,7 +253,7 @@
     opacity: 0;
   }
   &.bottom-enter-active {
-    .transition(all 0.3s ease);
+    .transition(all 0.1s ease);
     .transform(scaleY(1));
   }
   &.bottom-leave {
@@ -250,7 +262,7 @@
   }
   &.bottom-leave-active {
     .transform(scaleY(0.5));
-    .transition(all 0.3s ease);
+    .transition(all 0.1s ease);
     opacity: 0;
   }
 }

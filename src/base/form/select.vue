@@ -1,13 +1,23 @@
 <template>
     <div class="select_wrapper" ref="selectList" @click.stop="selectClick">
         <span :class="{ac:selectListShow}"></span>
-        <fx-input class="input" :readOnly="readonly" v-model="selectValue"></fx-input>
+        <fx-input v-if="!multiple" class="input" :readOnly="readonly" v-model="selectValue"></fx-input>
+        <ul v-else class="multiple clearfix" :class="{max_height:multiple&&!selectListShow}">
+            <li v-for="item in selectMultipleList" v-if="item.checked">
+                {{item.label}}
+                <span @click.stop="deleteSelectItem(item)"><i class="iconfont icon-close"></i></span>
+            </li>
+        </ul>
         <transition name="top">
             <div class="select_list" v-if="selectListShow">
-                <div class="select_item" v-for="item in data"
-                     :class="{selectAc:selectValue===item.label}"
+                <div class="select_item text_hide" v-for="item in data"
+                     :class="[
+                         {select_ac:!multiple&&selectValue===item.label},
+                         {select_ac:multiple&&item.checked}
+                         ]"
                      @click="selectListClick(item)">
                     {{item.label}}
+                    <em v-if="multiple&&item.checked"><i class="iconfont icon-yes"></i></em>
                 </div>
             </div>
         </transition>
@@ -25,6 +35,10 @@
             data: {
                 type: Array,
                 default: []
+            },
+            multiple: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -32,22 +46,20 @@
                 selectValue: '',
                 selectListShow: false,
                 readonly: true,
+                selectMultipleList: [],
             }
         },
         methods: {
             // 点击显示下拉
             selectClick() {
+                if (this.isDisabled()) {
+                    return;
+                }
                 this.selectListShow = true;
             },
             // 点击下拉选项
             selectListClick(item) {
-                this.readonly = false;
-                setTimeout(() => {
-                    this.selectValue = item.label;
-                    this.selectListShow = false;
-                    this.readonly = true;
-                    this.updateModel(item.value);
-                })
+                !this.multiple ? this._selectOnly(item) : this._selectMultiple(item);
             },
             // 点击空白隐藏
             clickOtherCloseDom() {
@@ -63,7 +75,16 @@
             },
             // 初始化,显示选中默认值
             initDefaultValue() {
-                if (this.data.length) {
+                if (this.data.length && this.multiple && typeof this.value === 'object') {
+                    this.data.forEach(it => {
+                        this.value.forEach(item => {
+                            if (it.value === item) {
+                                it.checked = true;
+                            }
+                        })
+                    });
+                    this.selectMultipleList = JSON.parse(JSON.stringify(this.data));
+                } else if (this.data.length) {
                     this.data.forEach(item => {
                         if (this.value && this.value === item.value) {
                             this.selectValue = item.label;
@@ -71,7 +92,47 @@
                         }
                     })
                 }
-            }
+            },
+            // 单选逻辑
+            _selectOnly(item) {
+                this.readonly = false;
+                setTimeout(() => {
+                    this.selectValue = item.label;
+                    this.selectListShow = false;
+                    this.readonly = true;
+                    this.updateModel(item.value);
+                    this.emitEvent(Object.assign({active: 'selectItemClick'}, item))
+                })
+            },
+            // 多选逻辑
+            _selectMultiple(item) {
+                let off = false;
+                if (!this.selectMultipleList.length) {
+                    this.selectMultipleList.push(Object.assign(item, {checked: true}));
+                    return;
+                }
+                this.selectMultipleList.forEach(it => {
+                    if (it.value === item.value) {
+                        off = true;
+                    }
+                });
+                if (!off) {
+                    this.selectMultipleList.push(Object.assign(item, {checked: true}));
+                }
+            },
+            // 多选删除
+            deleteSelectItem(item) {
+                this.selectMultipleList.forEach((it, index) => {
+                    if (it.value === item.value) {
+                        this.selectMultipleList.splice(index, 1);
+                        this.data.forEach(dataItem => {
+                            if (dataItem.value === it.value) {
+                                dataItem.checked = false;
+                            }
+                        })
+                    }
+                });
+            },
         },
         mounted() {
             this.$nextTick(() => {
@@ -82,6 +143,14 @@
         },
         beforeDestroy() {
             window.removeEventListener('mousedown', this.closeDown);
+        },
+        watch: {
+            value() {
+                this.initDefaultValue();
+            },
+            data() {
+                this.initDefaultValue();
+            }
         },
         components: {
             'fx-input': Input,
@@ -120,16 +189,66 @@
                 height: 30px;
                 line-height: 30px;
                 cursor: pointer;
-                &.selectAc {
+                position: relative;
+                &.select_ac {
                     background-color: @select-ac-bg !important;
                     color: @select-ac-color !important;
                 }
                 &:hover {
                     background-color: @select-hover-bg;
                 }
+                > em {
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    line-height: 16px;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto 0;
+                }
             }
         }
-        span {
+        .multiple {
+            width: @input-width;
+            box-sizing: border-box;
+            padding: 0 @padding-input;
+            font-size: 12px;
+            background-color: @input-bg;
+            border-radius: @input-border-radius;
+            border: 1px solid @border-color;
+            min-height: @height-normal;
+            overflow: hidden;
+            &.max_height {
+                height: @height-normal;
+            }
+            > li {
+                padding: 0 26px 0 10px;
+                margin: 2px 5px;
+                border-radius: @border-radius-btn;
+                min-height: 24px;
+                line-height: 24px;
+                float: left;
+                position: relative;
+                border: 1px solid @select-multiple-border;
+                color: @select-multiple-color;
+                background-color: @select-multiple-bg;
+                > span {
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    line-height: 16px;
+                    position: absolute;
+                    right: 10px;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto 0;
+                    cursor: pointer;
+                }
+            }
+        }
+        > span {
             display: inline-block;
             position: absolute;
             top: 50%;

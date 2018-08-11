@@ -1,7 +1,9 @@
 <template>
     <div class="select">
-        <fx-select :data="selectData" v-model="selectValue"></fx-select>
+        <fx-select :data="selectData" @clickEvt="selectClick" v-model="selectValue"></fx-select>
         {{selectValue}}
+        <fx-select :data="selectData" multiple @clickEvt="selectClick" v-model="selectValue2"></fx-select>
+        {{selectValue2}}
     </div>
 </template>
 
@@ -15,8 +17,17 @@
                     {label: '选项三', value: 3, id: 3},
                     {label: '选项四', value: 4, id: 4},
                     {label: '选项五', value: 5, id: 5},
+                    {label: '选项六', value: 6, id: 6},
+                    {label: '选项七', value: 7, id: 7},
+                    {label: '选项八', value: 8, id: 8},
                 ],
-                selectValue: 3
+                selectValue: 3,
+                selectValue2: [1, 3, 2, 5],
+            }
+        },
+        methods: {
+            selectClick(pos) {
+                console.log(pos)
             }
         }
     }
