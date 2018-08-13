@@ -3,7 +3,7 @@
         <span :class="{ac:selectListShow}"></span>
         <fx-input v-if="!multiple" class="input" :readOnly="readonly" v-model="selectValue"></fx-input>
         <ul v-else class="multiple clearfix" :class="{max_height:multiple&&!selectListShow}">
-            <li v-for="item in selectMultipleList" v-if="item.checked">
+            <li v-for="item in selectMultipleList">
                 {{item.label}}
                 <span @click.stop="deleteSelectItem(item)"><i class="iconfont icon-close"></i></span>
             </li>
@@ -76,14 +76,16 @@
             // 初始化,显示选中默认值
             initDefaultValue() {
                 if (this.data.length && this.multiple && typeof this.value === 'object') {
-                    this.data.forEach(it => {
+                    this.selectMultipleList = [];
+                    this.data.forEach(dataItem => {
+                        dataItem.checked = false;
                         this.value.forEach(item => {
-                            if (it.value === item) {
-                                it.checked = true;
+                            if (dataItem.value === item) {
+                                this.selectMultipleList.push(dataItem);
+                                dataItem.checked = true;
                             }
                         })
                     });
-                    this.selectMultipleList = JSON.parse(JSON.stringify(this.data));
                 } else if (this.data.length) {
                     this.data.forEach(item => {
                         if (this.value && this.value === item.value) {
@@ -108,7 +110,7 @@
             _selectMultiple(item) {
                 let off = false;
                 if (!this.selectMultipleList.length) {
-                    this.selectMultipleList.push(Object.assign(item, {checked: true}));
+                    this.selectMultipleList.push(item);
                     return;
                 }
                 this.selectMultipleList.forEach(it => {
@@ -116,23 +118,41 @@
                         off = true;
                     }
                 });
-                if (!off) {
-                    this.selectMultipleList.push(Object.assign(item, {checked: true}));
+                if (!off && !item.checked) {
+                    this.selectMultipleList.push(item);
+                    this.data.forEach(dataItem => {
+                        if (dataItem.value === item.value) {
+                            dataItem.checked = true;
+                        }
+                    })
+                } else if (item.checked) {
+                    this.deleteSelectItem(item);
+                    return;
                 }
+                this.updataMultiple();
             },
             // 多选删除
             deleteSelectItem(item) {
+                this.data.forEach(dataItem => {
+                    if (dataItem.value === item.value) {
+                        dataItem.checked = false;
+                    }
+                });
                 this.selectMultipleList.forEach((it, index) => {
                     if (it.value === item.value) {
                         this.selectMultipleList.splice(index, 1);
-                        this.data.forEach(dataItem => {
-                            if (dataItem.value === it.value) {
-                                dataItem.checked = false;
-                            }
-                        })
                     }
                 });
+                this.updataMultiple();
             },
+            // 多选数据绑定
+            updataMultiple() {
+                let arr = [];
+                this.selectMultipleList.forEach(item => {
+                    arr.push(item.value);
+                });
+                this.updateModel(arr);
+            }
         },
         mounted() {
             this.$nextTick(() => {
@@ -163,6 +183,7 @@
     @import "../util/style/common";
 
     .select_wrapper {
+        user-select: none;
         display: inline-block;
         position: relative;
         min-height: @height-normal;
@@ -175,6 +196,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
+            z-index: 30;
             max-width: 100%;
             width: 100%;
             max-height: 200px;
@@ -200,8 +222,7 @@
                 > em {
                     display: inline-block;
                     width: 16px;
-                    height: 16px;
-                    line-height: 16px;
+                    background-color: #fff;
                     position: absolute;
                     right: 0;
                     top: 0;
@@ -220,11 +241,13 @@
             border: 1px solid @border-color;
             min-height: @height-normal;
             overflow: hidden;
+            position: relative;
+            z-index: 5;
             &.max_height {
                 height: @height-normal;
             }
             > li {
-                padding: 0 26px 0 10px;
+                padding: 0 26px 0 5px;
                 margin: 2px 5px;
                 border-radius: @border-radius-btn;
                 min-height: 24px;
@@ -240,7 +263,7 @@
                     height: 16px;
                     line-height: 16px;
                     position: absolute;
-                    right: 10px;
+                    right: 5px;
                     top: 0;
                     bottom: 0;
                     margin: auto 0;
