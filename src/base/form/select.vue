@@ -129,7 +129,7 @@
                     this.deleteSelectItem(item);
                     return;
                 }
-                this.updataMultiple();
+                this.updateMultiple();
             },
             // 多选删除
             deleteSelectItem(item) {
@@ -143,10 +143,10 @@
                         this.selectMultipleList.splice(index, 1);
                     }
                 });
-                this.updataMultiple();
+                this.updateMultiple();
             },
             // 多选数据绑定
-            updataMultiple() {
+            updateMultiple() {
                 let arr = [];
                 this.selectMultipleList.forEach(item => {
                     arr.push(item.value);
