@@ -2,7 +2,9 @@
     <div class="select_wrapper" ref="selectList" @click.stop="selectClick">
         <span :class="{ac:selectListShow}"></span>
         <fx-input v-if="!multiple" class="input" :readOnly="readonly" v-model="selectValue"></fx-input>
-        <ul v-else class="multiple clearfix" :class="{max_height:multiple&&!selectListShow}">
+        <ul v-else
+            class="multiple clearfix"
+            :class="{max_height:multiple&&!selectListShow,focus:multiple&&selectListShow}">
             <li v-for="item in selectMultipleList">
                 {{item.label}}
                 <span @click.stop="deleteSelectItem(item)"><i class="iconfont icon-close"></i></span>
@@ -109,8 +111,9 @@
             // 多选逻辑
             _selectMultiple(item) {
                 let off = false;
-                if (!this.selectMultipleList.length) {
+                if (!item.checked&&!this.selectMultipleList.length) {
                     this.selectMultipleList.push(item);
+                    this.updateMultiple();
                     return;
                 }
                 this.selectMultipleList.forEach(it => {
@@ -243,6 +246,11 @@
             overflow: hidden;
             position: relative;
             z-index: 5;
+            &.focus {
+                border-color: @input-focus-primary!important;
+                outline: 0;
+                .box-shadow(inset 0 1px 1px 0 @input-inset-shadow, 0 0 8px 0 @input-outset-shadow-primary);
+            }
             &.max_height {
                 height: @height-normal;
             }
