@@ -36,19 +36,19 @@
                 {{modeInput}}
             </li>
             <!--<li>-->
-                <!--<h3>参数 v-mode 主题 格式 Boolean 默认 false 作用:禁选</h3>-->
-                <!--<fx-input-img v-model="inputImg"></fx-input-img>-->
-                <!--{{inputImg.length?inputImg[0]:[]}}-->
+            <!--<h3>参数 v-mode 主题 格式 Boolean 默认 false 作用:禁选</h3>-->
+            <!--<fx-input-img v-model="inputImg"></fx-input-img>-->
+            <!--{{inputImg.length?inputImg[0]:[]}}-->
             <!--</li>-->
             <!--<li>-->
-                <!--<h3>参数 v-mode 主题 格式 Boolean 默认 false 作用:禁选</h3>-->
-                <!--<form action="http://192.168.2.185/car/order/executeOrder" method="post"-->
-                      <!--enctype="multipart/form-data">-->
-                    <!--<input type="file" name="fileName" multiple="multiple">-->
-                    <!--<input type="text" name="id" value="12">-->
-                    <!--<input type="submit" value="Submit"/>-->
-                <!--</form>-->
-                <!--{{inputImg.length?inputImg[0]:[]}}-->
+            <!--<h3>参数 v-mode 主题 格式 Boolean 默认 false 作用:禁选</h3>-->
+            <!--<form action="http://192.168.2.185/car/order/executeOrder" method="post"-->
+            <!--enctype="multipart/form-data">-->
+            <!--<input type="file" name="fileName" multiple="multiple">-->
+            <!--<input type="text" name="id" value="12">-->
+            <!--<input type="submit" value="Submit"/>-->
+            <!--</form>-->
+            <!--{{inputImg.length?inputImg[0]:[]}}-->
             <!--</li>-->
         </ul>
     </div>

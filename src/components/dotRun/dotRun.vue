@@ -53,10 +53,10 @@
                 speedY: 1,
             });
             this.$fivexu.dotRun('#hover', {
-                dotsNumber: 1,
+                dotsNumber: 300,
                 speedX: 2,
                 speedY: 1,
-                isHover: false,
+                isHover: true,
                 ArcColor: '#f69',
                 lineColor: `#00f`,
                 mouseColor: `#f00`
