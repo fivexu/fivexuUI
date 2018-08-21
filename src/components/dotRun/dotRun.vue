@@ -19,7 +19,7 @@
                 </div>
             </li>
             <li>
-                <h2>hover效果 此处颜色随机 <span @click="refresh">点击刷新</span></h2>
+                <h2>hover效果</h2>
                 <canvas id="hover"></canvas>
             </li>
         </ul>

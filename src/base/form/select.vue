@@ -1,8 +1,8 @@
 <template>
     <div class="select_wrapper" ref="selectList" @click.stop="selectClick">
-        <span :class="{ac:selectListShow}"></span>
+        <span :class="{ac:selectListShow&&!disable}"></span>
         <fx-input v-if="!multiple" class="input" :readOnly="readonly" v-model="selectValue"></fx-input>
-        <ul v-else
+        <ul v-if="multiple"
             class="multiple clearfix"
             :class="{max_height:multiple&&!selectListShow,focus:multiple&&selectListShow}">
             <li v-for="item in selectMultipleList">
@@ -11,7 +11,7 @@
             </li>
         </ul>
         <transition name="top">
-            <div class="select_list" v-if="selectListShow">
+            <div class="select_list" v-if="selectListShow&&!disable">
                 <div class="select_item text_hide" v-for="item in data"
                      :class="[
                          {select_ac:!multiple&&selectValue===item.label},
@@ -54,9 +54,6 @@
         methods: {
             // 点击显示下拉
             selectClick() {
-                if (this.isDisabled()) {
-                    return;
-                }
                 this.selectListShow = true;
             },
             // 点击下拉选项
@@ -111,7 +108,7 @@
             // 多选逻辑
             _selectMultiple(item) {
                 let off = false;
-                if (!item.checked&&!this.selectMultipleList.length) {
+                if (!item.checked && !this.selectMultipleList.length) {
                     this.selectMultipleList.push(item);
                     this.updateMultiple();
                     return;
@@ -247,7 +244,7 @@
             position: relative;
             z-index: 5;
             &.focus {
-                border-color: @input-focus-primary!important;
+                border-color: @input-focus-primary !important;
                 outline: 0;
                 .box-shadow(inset 0 1px 1px 0 @input-inset-shadow, 0 0 8px 0 @input-outset-shadow-primary);
             }

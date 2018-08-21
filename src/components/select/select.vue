@@ -15,7 +15,21 @@
             <li>
                 <h2>多选</h2>
                 <p>v-model 绑定data组数中的value 但格式为[value,value,value] [0,1,2,3]</p>
-                <fx-select :data="selectData" multiple @clickEvt="selectClick" v-model="selectValue2"></fx-select>
+                <fx-select :disable="false" :data="selectData" multiple @clickEvt="selectClick"
+                           v-model="selectValue2"></fx-select>
+                {{selectValue2}}
+            </li>
+            <li>
+                <h2>禁选</h2>
+                <p>disable Boolean 默认 false</p>
+                <fx-select :disable="true"
+                           :data="selectData"
+                           @clickEvt="selectClick"
+                           v-model="selectValue"></fx-select>
+                <fx-select :disable="true"
+                           :data="selectData"
+                           multiple @clickEvt="selectClick"
+                           v-model="selectValue2"></fx-select>
                 {{selectValue2}}
             </li>
         </ul>
@@ -53,8 +67,8 @@
         .header {
             padding-bottom: 20px;
         }
-        ul{
-            >li{
+        ul {
+            > li {
                 padding-bottom: 15px;
             }
         }
