@@ -90,9 +90,8 @@
 <style scoped lang="less">
   ul {
     li {
-      height: 350px;
+      min-height: 350px;
       margin-bottom: 30px;
-      border-bottom: 1px solid #ccc;
       canvas {
         width: 1000px;
         height: 300px;
