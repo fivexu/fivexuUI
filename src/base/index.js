@@ -15,6 +15,7 @@ import FxCheckbox from './form/checkbox'
 import FxCheckboxItem from './form/checkboxItem'
 import FxSwitch from './form/switch'
 import FxMenu from './menu/menu'
+import FxTree from './tree/tree'
 
 import FxFullPage from './fullpage/fullpage'
 import Slider from './slider/slider'
@@ -41,6 +42,7 @@ let global = {
         Vue.component('fx-checkboxItem', FxCheckboxItem);
         Vue.component('fx-switch', FxSwitch);
         Vue.component('fx-menu', FxMenu);
+        Vue.component('fx-tree', FxTree);
         Vue.component('fx-full-page', FxFullPage);
         Vue.component('fx-slider', Slider);
         Vue.component('fx-mosaic', Mosaic);

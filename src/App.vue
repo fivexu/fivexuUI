@@ -35,6 +35,10 @@
                         "title": "多选"
                     },
                     {
+                        "link": "/tree",
+                        "title": "树"
+                    },
+                    {
                         "link": "/switch",
                         "title": "开关"
                     },
