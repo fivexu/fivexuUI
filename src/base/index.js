@@ -48,6 +48,7 @@ let global = {
         Vue.component('fx-mosaic', Mosaic);
         Vue.component('fx-scroll-bar', ScrollBar);
         Vue.component('fx-time-line', TimeLine);
+        Vue.component('fx-page', Page);
 
         Vue.directive('tooltip', Tooltip);
     }

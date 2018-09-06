@@ -1,131 +1,236 @@
 <template>
-    <div id="page" :class="size">
-        <div class="total">共{{total}}条</div>
-        <div class="show_page">
-            每页显示
-            <select>
-                <option>1</option>
-                <option>2</option>
-            </select>
-            条
-        </div>
-        <ul class="pages">
-            <li><i class="iconfont icon-left-too"></i></li>
-            <li><i class="iconfont icon-left" @click="previous"></i></li>
-            <li v-for="(item,index) in showPageArr"
-                :class="{ac:currentIndex===index}">
-                {{currentIndex}}
-            </li>
-            <li><i class="iconfont icon-right" @click="next"></i></li>
-            <li><i class="iconfont icon-right-too"></i></li>
-        </ul>
+  <div id="page" :class="size">
+    <div class="total" v-if="isTotal">共{{total}}条</div>
+    <div class="show_page" v-if="isSelectPage">
+      <fx-select style="width: 80px;" :size="size" :data="pageSizeSelect" v-model="pageSizeChange"></fx-select>
     </div>
+    <ul class="pages">
+      <li v-if="isFirstLast" @click="toPage(1)" class="first_last" :class="{disable:currentIndex<=1}">
+        <slot v-if="hasSlot('first')" name="first"></slot>
+        <span v-else>首页</span>
+      </li>
+      <li @click="previous" :class="{disable:currentIndex<=1}">
+        <slot v-if="hasSlot('previous')" name="previous"></slot>
+        <span v-else><i class="iconfont icon-left"></i></span>
+      </li>
+      <li v-if="isMore&&prevMore" @click="toPage(currentIndex-5<=1?1:currentIndex-5)">
+        <i class="iconfont icon-more"></i>
+      </li>
+      <li v-for="item in pageArr"
+          @click="toPage(item)"
+          v-show="isPage"
+          :class="{ac:currentIndex===item}">
+        {{item}}
+      </li>
+      <li v-if="isMore&&nextMore" @click="toPage(currentIndex+5>=totalPage?totalPage:currentIndex+5)">
+        <i class="iconfont icon-more"></i>
+      </li>
+      <li @click="next" :class="{disable:currentIndex>=totalPage}">
+        <slot v-if="hasSlot('next')" name="next"></slot>
+        <span v-else><i class="iconfont icon-right"></i></span>
+      </li>
+      <li v-if="isFirstLast" @click="toPage(totalPage)" class="first_last" :class="{disable:currentIndex>=totalPage}">
+        <slot v-if="hasSlot('last')" name="last"></slot>
+        <span v-else>末页</span>
+      </li>
+    </ul>
+    <div class="page_go">
+      <span>跳转</span>
+      <fx-input :size="size" v-model="pageToNum" @keydown="pageGoKeyDown($event)"></fx-input>
+      <span>页</span>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "page",
-        props: {
-            total: {
-                type: Number,
-                default: 101  //  分页总数
-            },
-            currentPage: {
-                type: Number,
-                default: 1   //  当前所处页数
-            },
-            showPageCount: {
-                type: Number,
-                default: 5  // 页码条个数  5 => << < 1 2 3 4 5 > >> 五个页码
-            },
-            selectPageCount: {
-                type: Number,
-                default: 10  // 每页显示条数
-            },
-            size: {
-                type: String,  // page组件大小
-                default: 'mini'
-            }
-        },
-        data() {
-            return {
-                showPageArr: new Array(this.showPageCount),
-                currentIndex: 1
-            }
-        },
-        methods: {
-            initShowPageArray() {
-                let pageNumber = Math.ceil(this.total / this.selectPageCount);
-                let start = 0;
-                let end = 0;
-            },
-            previous() {
+  import GlobalForm from '../global/global-form.vue';
+  import Select from '../form/select';
+  import Input from '../form/input';
 
-            },
-            next() {
-                this.currentIndex++
-            }
-        },
-        mounted() {
-            this.initShowPageArray();
+  export default {
+    name: "page",
+    extends: GlobalForm,
+    props: {
+      total: {
+        type: Number,
+        default: 0  //  分页总数
+      },
+      currentPage: {
+        type: Number,
+        default: 1   //  当前所处页数
+      },
+      pageCount: {
+        type: Number,
+        default: 5 // 页码条个数  5 => << < 1 2 3 4 5 > >> 五个页码  基数
+      },
+      selectPageCount: {
+        type: Number,
+        default: 10  // 每页显示条数
+      },
+      isSelectPage: {
+        type: Boolean,
+        default: true
+      },
+      isTotal: {
+        type: Boolean,
+        default: true
+      },
+      isMore: {
+        type: Boolean,
+        default: true
+      },
+      isFirstLast: {
+        type: Boolean,
+        default: true
+      },
+      isPage: {
+        type: Boolean,
+        default: true
+      }
+    },
+    data() {
+      return {
+        showPageArr: new Array(this.pageCount),
+        currentIndex: this.currentPage || 1,
+        pageSizeSelect: [
+          {label: '10条/页', value: 10, id: 10},
+          {label: '20条/页', value: 20, id: 20},
+          {label: '30条/页', value: 30, id: 30},
+          {label: '50条/页', value: 50, id: 50},
+          {label: '100条/页', value: 100, id: 100},
+          {label: '200条/页', value: 200, id: 200},
+        ],
+        pageSizeChange: this.selectPageCount || 10,
+        prevMore: false,
+        nextMore: false,
+        pageToNum: 1,
+      }
+    },
+    computed: {
+      totalPage() {
+        return Math.ceil(this.total / this.pageSizeChange);
+      },
+      pageArr() {
+        const array = [];
+        const _offset = (this.pageCount - 1) / 2;
+        const offset = {
+          start: this.currentIndex - _offset,
+          end: this.currentIndex + _offset
+        };
+        if (offset.start < 1) {
+          offset.end = offset.end + (1 - offset.start);
+          offset.start = 1
         }
+        if (offset.end > this.totalPage) {
+          offset.start = offset.start - (offset.end - this.totalPage);
+          offset.end = this.totalPage
+        }
+        if (offset.start < 1) offset.start = 1;
+        this.prevMore = (offset.start > 1);
+        this.nextMore = (offset.end < this.totalPage);
+        for (let i = offset.start; i <= offset.end; i++) {
+          array.push(i)
+        }
+        return array
+      }
+    },
+    methods: {
+      previous() {
+        if (this.currentIndex > 1) this.toPage(this.currentIndex - 1)
+      },
+      next() {
+        if (this.currentIndex < this.totalPage) this.toPage(this.currentIndex + 1)
+      },
+      toPage(page) {
+        if (this.currentIndex !== page) {
+          this.currentIndex = page;
+          this.updateModel(page);
+          this.$emit('change', page)
+        }
+      },
+      pageGoKeyDown(ev) {
+        ev = ev || event;
+        console.log(ev)
+      }
+    },
+    components: {
+      'fx-select': Select,
+      'fx-input': Input,
     }
+  }
 </script>
 
 <style scoped lang="less">
-    @import "../util/font/iconfont.css";
-    @import "../util/style/common";
+  @import "../util/style/common";
 
-    #page {
-        user-select: none;
-        display: flex;
-        flex-wrap: nowrap;
-        &.default {
-            height: @height-normal;
-            line-height: @height-normal;
-        }
-        &.mini {
-            height: @height-mini;
-            line-height: @height-mini;
-        }
-        &.large {
-            height: @height-large;
-            line-height: @height-large;
-        }
-        .total {
-            margin-right: 10px;
-        }
-        .show_page {
-            margin-right: 10px;
-        }
-        .pages {
-            display: flex;
-            flex-wrap: nowrap;
-            > li {
-                transition: all 0.1s;
-                cursor: pointer;
-                margin: 0 5px;
-                box-sizing: border-box;
-                padding: 0 10px;
-                text-align: center;
-                &:hover {
-                    .border(@primary-color);
-                    color: @primary-color;
-                    i {
-                        .iconfont(@primary-color)
-                    }
-                }
-                &.ac {
-                    .border(@primary-color);
-                    background-color: @primary-color;
-                    color: #fff;
-                }
-                .border;
-                .border-radius;
-                i {
-                    .iconfont;
-                }
-            }
-        }
+  #page {
+    user-select: none;
+    display: flex;
+    flex-wrap: nowrap;
+    height: @height-normal;
+    line-height: @height-normal;
+    &.normal, .page_go {
+      height: @height-normal;
+      line-height: @height-normal;
+      .pages > li {
+        width: @height-normal;
+      }
     }
+    &.mini, .page_go {
+      height: @height-mini;
+      line-height: @height-mini;
+      .pages > li {
+        width: @height-mini;
+      }
+    }
+    &.large, .page_go {
+      height: @height-large;
+      line-height: @height-large;
+      .pages > li {
+        width: @height-large;
+      }
+    }
+    .total {
+      margin-right: 10px;
+    }
+    .pages {
+      display: flex;
+      flex-wrap: nowrap;
+      > li {
+        background-color: @page-bg;
+        transition: all 0.1s;
+        cursor: pointer;
+        margin: 0 5px;
+        text-align: center;
+        &.first_last {
+          padding: 0 5px;
+        }
+        &:hover {
+          .border(@primary-color);
+          color: @primary-color;
+          i {
+            .iconfont(@primary-color)
+          }
+        }
+        &.ac {
+          .border(@primary-color);
+          background-color: @primary-color;
+          color: #fff;
+          cursor: not-allowed;
+        }
+        &.disable {
+          color: @page-disable;
+          cursor: not-allowed;
+          &:hover {
+            .border;
+          }
+        }
+        .border;
+        .border-radius;
+        i {
+          .iconfont(#333, 16px);
+        }
+      }
+    }
+  }
 </style>

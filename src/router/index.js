@@ -17,6 +17,7 @@ import Select from '../components/select/select';
 import TimeLine from '../components/timeLine/timeLine';
 import DotRun from '../components/dotRun/dotRun';
 import Tree from '../components/tree/tree';
+import Page from '../components/page/page';
 
 Vue.use(Router);
 
@@ -39,5 +40,6 @@ export default new Router({
         {path: '/timeLine', component: TimeLine},
         {path: '/dotRun', component: DotRun},
         {path: '/tree', component: Tree},
+        {path: '/page', component: Page},
     ]
 })

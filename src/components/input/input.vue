@@ -10,9 +10,9 @@
             </li>
             <li>
                 <h3>参数 size 大小 格式 String 默认 normal</h3>
-                <fx-input :size="'mini'"></fx-input>
-                <fx-input :size="'normal'"></fx-input>
-                <fx-input :size="'large'"></fx-input>
+                <fx-input size="mini"></fx-input>
+                <fx-input size="normal"></fx-input>
+                <fx-input size="large"></fx-input>
 
             </li>
             <li>

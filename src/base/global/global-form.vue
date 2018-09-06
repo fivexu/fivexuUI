@@ -1,38 +1,39 @@
 <script>
-    import Global from './global.vue'
+  import Global from './global.vue'
 
-    const SIZE_GLOBAL = {
-        MINE: 'mine',
-        NORMAL: 'normal',
-        LARGE: 'large'
-    };
+  const SIZE_GLOBAL = {
+    MINE: 'mine',
+    NORMAL: 'normal',
+    LARGE: 'large'
+  };
 
-    export default {
-        extends: Global,
-        props: {
-            readOnly: {
-                type: Boolean,
-                default: false
-            },
-            value: {
-                type: Array | String | Number,
-                default: ''
-            },
-            size: {
-                type: String,
-                default: SIZE_GLOBAL.NORMAL
-            }
-        },
-        methods: {
-            updateModel(value) {
-                this.$emit('input', value);
-            },
-            isReadonly() {
-                return this.widgetReadonly;
-            },
-            hasSlot() {
-                return this.$slots.default
-            }
-        }
+  export default {
+    extends: Global,
+    props: {
+      readOnly: {
+        type: Boolean,
+        default: false
+      },
+      value: {
+        type: Array | String | Number,
+        default: ''
+      },
+      size: {
+        type: String,
+        default: SIZE_GLOBAL.NORMAL
+      }
+    },
+    methods: {
+      updateModel(value) {
+        this.$emit('input', value);
+      },
+      isReadonly() {
+        return this.widgetReadonly;
+      },
+      hasSlot(name = null) {
+        if (name) return this.$slots[name];
+        return this.$slots.default
+      }
     }
+  }
 </script>
