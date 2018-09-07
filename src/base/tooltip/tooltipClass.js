@@ -45,6 +45,7 @@ class TooltipClass {
     setContent(msg) {
         if (this._init) {
             this.tooltip.innerHTML = msg;
+            this.tooltip.appendChild(this.tooltipAfter);
         } else {
             this.init();
         }
