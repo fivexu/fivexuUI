@@ -68,7 +68,6 @@
 
 <script>
     export default {
-        name: "button",
         methods: {
             buttonClick() {
                 alert('ok')

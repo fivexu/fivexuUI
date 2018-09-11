@@ -1,4 +1,7 @@
 import Vue from 'vue';
+// js常用方法
+import Common from './util/js/commonClass.js';
+
 // 原型链
 import LoadingClass from './loading/loadingClass.js';
 import Message from './message/messageClass.js';
@@ -31,6 +34,7 @@ import './util/font/iconfont.css';
 
 let global = {
   install: function () {
+    Vue.prototype.$fivexuClass = Common;
     LoadingClass.initLoading(Vue);
     Message.initMessage(Vue);
     DotRun.initDotRun(Vue);

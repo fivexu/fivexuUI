@@ -18,7 +18,7 @@ class loading {
       if (hasPosition === 'static' || hasPosition === '') this.currentElement.style.position = 'relative';
       this.loadingWrapper.appendChild(loadingContent);
       this.currentElement.appendChild(this.loadingWrapper);
-    }, 100)
+    }, 100);
   }
 
   show() {
@@ -34,6 +34,12 @@ class loading {
   }
 
   hide() {
+    if (this._init) {
+      this.loadingWrapper.style.display = 'none';
+    }
+  }
+
+  destroy() {
     if (this._init) {
       this.loadingWrapper.style.display = 'none';
     }

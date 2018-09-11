@@ -37,7 +37,6 @@
 
 <script>
     export default {
-        name: "switch",
         data() {
             return {
                 switchInfo: true

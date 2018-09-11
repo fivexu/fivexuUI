@@ -1,8 +1,6 @@
 class DotRun {
   constructor(dom, obj = {}) {
-    if (!dom) {
-      return
-    }
+    if (!dom) return;
     this.canvas = dom.nodeType ? dom : document.querySelector(dom);
     if (!this.canvas.getContext('2d')) return;
     this.context = this.canvas.getContext('2d');

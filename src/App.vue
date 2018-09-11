@@ -100,6 +100,8 @@
             top: 0;
             bottom: 0;
             background-color: #fff;
+            height: 100%;
+            overflow: auto;
         }
         .content {
             width: 100%;
