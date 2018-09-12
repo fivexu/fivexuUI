@@ -69,6 +69,22 @@
 }
 
 // loading
+.fivexu_loading_svg {
+  height: 50px;
+  width: 50px;
+  transform-origin: center;
+  animation: loading-rotate 2s linear infinite;
+}
+
+.fivexu_loading_circle {
+  animation: loading-dash 1.5s ease-in-out infinite;
+  stroke-dasharray: 90, 150;
+  stroke-dashoffset: 0;
+  stroke-width: 4px;
+  stroke: @primary-color;
+  stroke-linecap: round;
+}
+
 .fivexu_loading_wrapper {
   position: absolute;
   left: 0;
@@ -90,19 +106,5 @@
     top: 0;
     bottom: 0;
     margin: auto;
-    .fivexu_loading_svg {
-      height: 50px;
-      width: 50px;
-      transform-origin: center;
-      animation: loading-rotate 2s linear infinite;
-    }
-    .fivexu_loading_circle {
-      animation: loading-dash 1.5s ease-in-out infinite;
-      stroke-dasharray: 90, 150;
-      stroke-dashoffset: 0;
-      stroke-width: 4px;
-      stroke: @primary-color;
-      stroke-linecap: round;
-    }
   }
 }

@@ -130,6 +130,7 @@
 .clearfix:after {
   content: "";
   display: block;
+  overflow: hidden;
   font-size: 0;
   height: 0;
   clear: both;
@@ -179,9 +180,10 @@
   &.left-enter {
     .transform(translateX(100%));
     opacity: 0;
+    height: 0;
   }
   &.left-enter-active {
-    .transition(all 0.1s ease);
+    .transition(all 0.3s ease);
   }
   &.left-leave {
     .transform(translateX(0));
@@ -189,7 +191,8 @@
   &.left-leave-active {
     .transform(translateX(100%));
     opacity: 0;
-    .transition(all 0.1s ease)
+    height: 0;
+    .transition(all 0.3s ease);
   }
 }
 
@@ -198,6 +201,7 @@
   &.right-enter {
     .transform(translateX(-100%));
     opacity: 0;
+    height: 0;
   }
   &.right-enter-active {
     .transition(all 0.1s ease)
@@ -208,6 +212,7 @@
   &.right-leave-active {
     .transform(translateX(-100%));
     opacity: 0;
+    height: 0;
     .transition(all 0.1s ease)
   }
 }
@@ -217,9 +222,10 @@
   &.top-enter {
     .transform(translateY(100%));
     opacity: 0;
+    height: 0;
   }
   &.top-enter-active {
-    .transition(all 0.1s ease)
+    .transition(all 0.3s ease-in-out);
   }
   &.top-leave {
     .transform(translateY(0));
@@ -227,7 +233,8 @@
   &.top-leave-active {
     .transform(translateY(100%));
     opacity: 0;
-    .transition(all 0.1s ease)
+    height: 0;
+    .transition(all 0.3s ease-in-out);
   }
 }
 
@@ -236,6 +243,7 @@
   &.bottom-enter {
     .transform(translateY(-100%));
     opacity: 0;
+    height: 0;
   }
   &.bottom-enter-active {
     .transition(all 0.1s ease)
@@ -246,6 +254,7 @@
   &.bottom-leave-active {
     .transform(translateY(-100%));
     opacity: 0;
+    height: 0;
     .transition(all 0.1s ease)
   }
 }

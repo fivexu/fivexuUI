@@ -37,7 +37,7 @@
         this.$fivexu.loading.show();
         setTimeout(() => {
           this.$fivexu.loading.hide();
-        }, 100000)
+        }, 1000);
       },
       loadingClick1() {
         this.$fivexu.loading.show({
@@ -51,7 +51,7 @@
       loadingClick2() {
         this.$fivexu.loading.show({
           bgColor: 'rgba(255, 155, 55, .5)',
-          text: '颜色--#06f',
+          text: '颜色--#06f颜色--#06f颜色--#06f',
           textColor: '#06f'
         });
         setTimeout(() => {
@@ -62,7 +62,7 @@
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .loading {
     width: 400px;
     height: 200px;

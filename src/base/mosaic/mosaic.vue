@@ -155,6 +155,9 @@
                         }
                         this.$refs.item[arr[i]].style[Transition] = `all 0.5s ease-out`;
                         setTimeout(() => {
+                            if (this.$refs.item[arr[i]] === 'undefined' || !this.$refs.item[arr[i]]) {
+                                return
+                            }
                             this.$refs.item[arr[i]].style[Transform] = `translate3d(0,0,0) rotate(0)`;
                             this.$refs.item[arr[i]].style.opacity = 1;
                             this.$refs.item[arr[i]].style.boxShadow = `0 0 10px 0 rgba(255,255,255,0)`;
