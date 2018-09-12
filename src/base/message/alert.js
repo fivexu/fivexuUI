@@ -24,17 +24,6 @@ function isNull(arr) {
   });
   return off;
 }
-// 判断提示数组是否为空了
-function isClose(arr) {
-  if (!arr.length) return true;
-  let off = true;
-  arr.forEach(item => {
-    if (item.messageShow) {
-      off = false;
-    }
-  });
-  return off;
-}
 
 let messageClass = {
   initMessage(vue) {
@@ -45,7 +34,7 @@ let messageClass = {
     let id = 0;
     let num = 0;
     if (!vue.prototype.$fivexu) vue.prototype.$fivexu = {};
-    vue.prototype.$fivexu.message = {
+    vue.prototype.$fivexu.alert = {
       show: function (options = {}) {
         if (options.isClose) {
           messageArr.push(Object.assign(options, {messageShow: true}));
@@ -59,8 +48,10 @@ let messageClass = {
           message = new messageVueDom({
             el: container,
             propsData: {
+              width: 0,
+              titleShow: options.titleShow ? options.titleShow : false,
               messageList: messageArr,
-              listPosition: 'top-right',
+              listPosition: 'top-center',
               isClose: options.isClose ? options.isClose : false,
             }
           });
@@ -69,14 +60,12 @@ let messageClass = {
         }
         if (options.isClose) return;
         setTimeout(() => {
-          // id--;
           num++;
           messageArr.forEach(item => {
             if (item.id === num) {
               item.messageShow = false
             }
           });
-          // if (id >= 0) messageArr[messageArr.length - 1 - id].messageShow = false;
           message.messageList = messageArr;
           if (message !== null && id === num && isNull(messageArr)) {
             setTimeout(() => {
@@ -87,7 +76,7 @@ let messageClass = {
               num = 0;
             }, 300);
           }
-        }, options.duration && options.duration >= 1000 ? options.duration : 2000);
+        }, options.duration && options.duration >= 1000 ? options.duration : 3000);
       },
       destroy: function () {
         if (message !== null) {

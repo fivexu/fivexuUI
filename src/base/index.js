@@ -5,6 +5,7 @@ import Common from './util/js/commonClass.js';
 // 原型链
 import LoadingClass from './loading/loadingClass.js';
 import Message from './message/messageClass.js';
+import Alert from './message/alert.js';
 import DotRun from './dotRun/dotRun.js';
 // 指令
 import Tooltip from './tooltip/tooltipClass.js';
@@ -37,8 +38,9 @@ let global = {
     Vue.prototype.$fivexuClass = Common;
     LoadingClass.initLoading(Vue);
     Message.initMessage(Vue);
+    Alert.initMessage(Vue);
     DotRun.initDotRun(Vue);
-
+    
     Vue.component('fx-button', FxButton);
     Vue.component('fx-input', FxInput);
     Vue.component('fx-input-img', FxInputImg);
@@ -56,7 +58,7 @@ let global = {
     Vue.component('fx-scroll-bar', ScrollBar);
     Vue.component('fx-time-line', TimeLine);
     Vue.component('fx-page', Page);
-
+    
     Vue.directive('tooltip', Tooltip);
     Vue.directive('loading', Loading);
   }

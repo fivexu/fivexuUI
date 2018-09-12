@@ -9,6 +9,7 @@ import Switch from '../components/switch/switch';
 import Loading from '../components/loading/loading';
 import Tooltip from '../components/tooltip/tooltip';
 import Message from '../components/message/message';
+import Alert from '../components/alert/alert';
 import Tag from '../components/tag/tag';
 import FullPage from '../components/fullpage/fullpage';
 import Slider from '../components/slider/slider';
@@ -32,6 +33,7 @@ export default new Router({
         {path: '/loading', component: Loading},
         {path: '/tooltip', component: Tooltip},
         {path: '/message', component: Message},
+        {path: '/alert', component: Alert},
         {path: '/tag', component: Tag},
         {path: '/fullpage', component: FullPage},
         {path: '/slider', component: Slider},

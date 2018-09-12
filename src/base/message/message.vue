@@ -2,13 +2,17 @@
   <transition :name="transitionName">
     <div class="message" ref="mes" :class="mesPosition" v-if="messageShowOwn">
       <div ref="content" class="content" v-if="messageShow" :class="mesType">
-        <div class="title">
+        <div class="title" v-if="titleShow">
           <span style="margin-right: 5px;" class="iconfont" :class="'icon-'+ mesType"></span>
           <span>{{title!==''?title:mesType==='success'?'成功提示':mesType==='warning'?'警告提示':'错误提示'}}</span>
           <i v-if="isClose" @click="closeMessage" class="iconfont icon-close"></i>
         </div>
-        <div ref="text">
+        <div class="text" ref="text" :style="{'padding-right':!titleShow&&isClose?'20px':0}">
+          <span v-if="!titleShow" class="iconfont" :class="'icon-'+ mesType"></span>
           <i>{{message}}</i>
+          <span class="close">
+            <i v-if="!titleShow&&isClose" @click="closeMessage" class="iconfont icon-close"></i>
+          </span>
         </div>
       </div>
     </div>
@@ -24,13 +28,17 @@
       }
     },
     props: {
+      titleShow: {
+        type: Boolean,
+        default: true
+      },
       title: {
         type: String,
         default: ''
       },
       message: {
         type: String,
-        default: 'message'
+        default: '提示'
       },
       messageShow: {
         type: Boolean,
@@ -54,20 +62,12 @@
       }
     },
     methods: {
-      initContent() {
-        if (!this.$refs.mes) return;
-        let width = this.$refs.text.offsetWidth + 20;
-        this.$refs.mes.style.width = `${width}px`;
-      },
       iconClass() {
         return `icon-${this.mesType}`
       },
       closeMessage() {
         this.messageShowOwn = false
       }
-    },
-    mounted() {
-      // this.initContent();
     },
     watch: {
       messageShow() {
@@ -82,10 +82,10 @@
   @import "../util/font/iconfont.css";
 
   .message {
-    max-width: 300px;
-    min-width: 150px;
+    width: 100%;
     padding-bottom: 10px;
     line-height: 1.5;
+    .transition(width 0.3s);
     .transition-to-left;
     .transition-to-right;
     .transition-to-bottom;
@@ -159,10 +159,29 @@
         color: @error-color;
       }
       .text {
+        min-height: 24px;
+        line-height: 1.5;
+        position: relative;
+        > span {
+          vertical-align: middle;
+          margin-right: 5px;
+        }
         > i {
           vertical-align: middle;
           .iconfont('#999', '12px');
           cursor: pointer;
+        }
+        > .close {
+          cursor: pointer;
+          text-align: center;
+          width: 20px;
+          height: 20px;
+          display: inline-block;
+          position: absolute;
+          right: -0px;
+          top: 0;
+          bottom: 0;
+          margin: auto 0;
         }
       }
       .title {

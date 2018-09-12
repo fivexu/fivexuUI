@@ -55,6 +55,10 @@
                         "title": "提示"
                     },
                     {
+                        "link": "/alert",
+                        "title": "警告弹窗"
+                    },
+                    {
                         "link": "/message",
                         "title": "提示弹窗"
                     },
