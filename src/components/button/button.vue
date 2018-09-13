@@ -75,8 +75,10 @@
     methods: {
       buttonClick(pos) {
         if (pos.action === 'click') {
-          alert('ok')
+          this.$fivexu.alert.show({message: '点击事件'});
+          return
         }
+        this.$fivexu.alert.show({message: '当前不能点击', mesType: 'error'})
       }
     }
   }

@@ -10,7 +10,7 @@ import DotRun from './dotRun/dotRun.js';
 // 指令
 import Tooltip from './tooltip/tooltipClass.js';
 import Loading from './loading/loading.js';
-
+// 组件
 import Page from './page/page'
 import FxButton from './form/button'
 import FxInput from './form/input'

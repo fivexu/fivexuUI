@@ -1,6 +1,6 @@
 <template>
     <ul class="menu">
-        <router-link tag="li" v-for="item in data" :to="item.link">
+        <router-link tag="li" v-for="item in data" :key="item.link" :to="item.link">
             {{item.title}}
         </router-link>
     </ul>
@@ -26,7 +26,7 @@
     @import "../util/style/common";
 
     .menu {
-        padding-top: 200px;
+        padding-top: 20px;
         > li {
             height: 40px;
             line-height: 40px;

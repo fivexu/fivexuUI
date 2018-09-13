@@ -2,6 +2,7 @@
     <div class="checkbox" @click.stop="checkboxClick" ref="checkbox">
         <slot v-if="hasSlot()"></slot>
         <CheckboxItem v-else v-for="item in data"
+                      :key="item"
                       v-model="checkboxModel"
                       :checked="item.checked?item.checked:false"
                       :disable="item.disable?item.disable:false"
