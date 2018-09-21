@@ -102,6 +102,19 @@
         background-color: @bg-color;
         color: @font-color-light;
       }
+      &.fill {
+        background-color: @bg-white;
+        color: @font-title;
+        .border(#ccc);
+        &.disable {
+          .border(#ccc) !important;
+          color: @font-color-light !important;
+        }
+        &:hover {
+          color: #333;
+          .border(#eee);
+        }
+      }
     }
     &.primary {
       background-color: @primary-color;

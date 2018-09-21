@@ -65,6 +65,10 @@
             "title": "提示"
           },
           {
+            "link": "/modal",
+            "title": "弹窗"
+          },
+          {
             "link": "/alert",
             "title": "警告弹窗"
           },

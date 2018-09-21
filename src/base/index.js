@@ -23,6 +23,7 @@ import FxCheckboxItem from './form/checkboxItem'
 import FxSwitch from './form/switch'
 import FxMenu from './menu/menu'
 import FxTree from './tree/tree'
+import FxModal from './modal/modal'
 
 import FxFullPage from './fullpage/fullpage'
 import Slider from './slider/slider'
@@ -58,6 +59,7 @@ let global = {
     Vue.component('fx-scroll-bar', ScrollBar);
     Vue.component('fx-time-line', TimeLine);
     Vue.component('fx-page', Page);
+    Vue.component('fx-modal', FxModal);
     
     Vue.directive('tooltip', Tooltip);
     Vue.directive('loading', Loading);

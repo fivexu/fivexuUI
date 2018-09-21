@@ -19,6 +19,7 @@ import TimeLine from '../components/timeLine/timeLine';
 import DotRun from '../components/dotRun/dotRun';
 import Tree from '../components/tree/tree';
 import Page from '../components/page/page';
+import Modal from '../components/modal/modal';
 
 Vue.use(Router);
 
@@ -43,5 +44,6 @@ export default new Router({
         {path: '/dotRun', component: DotRun},
         {path: '/tree', component: Tree},
         {path: '/page', component: Page},
+        {path: '/modal', component: Modal},
     ]
 })

@@ -8,6 +8,7 @@
       </li>
       <li>
         <h3>参数 type 主题 格式 String 默认 primary</h3>
+        <fx-button @clickEvt="buttonClick" :type="'default'">default</fx-button>
         <fx-button @clickEvt="buttonClick" :type="'primary'">primary</fx-button>
         <fx-button @clickEvt="buttonClick" :type="'success'">success</fx-button>
         <fx-button @clickEvt="buttonClick" :type="'warning'">warning</fx-button>
@@ -15,6 +16,7 @@
       </li>
       <li>
         <h3>参数 disable 禁用 格式 Boolean 默认 false</h3>
+        <fx-button @clickEvt="buttonClick" :disable="true" :type="'default'">default-disable</fx-button>
         <fx-button @clickEvt="buttonClick" :disable="true" :type="'primary'">primary-disable</fx-button>
         <fx-button @clickEvt="buttonClick" :disable="true" :type="'success'">success-disable</fx-button>
         <fx-button @clickEvt="buttonClick" :disable="true" :type="'warning'">warning-disable</fx-button>
@@ -33,7 +35,8 @@
       </li>
       <li>
         <h3>参数 fill 铺满背景色 格式 Boolean 默认 false</h3>
-        <fx-button @clickEvt="buttonClick" disable :type="'primary'" :fill="true">primary</fx-button>
+        <fx-button @clickEvt="buttonClick" :type="'default'" :fill="true">default</fx-button>
+        <fx-button @clickEvt="buttonClick" :type="'primary'" :fill="true">primary</fx-button>
         <fx-button @clickEvt="buttonClick" :type="'success'" :fill="true">success</fx-button>
         <fx-button @clickEvt="buttonClick" :type="'warning'" :fill="true">warning</fx-button>
         <fx-button @clickEvt="buttonClick" :type="'error'" :fill="true">error</fx-button>

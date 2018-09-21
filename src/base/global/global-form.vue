@@ -29,10 +29,6 @@
       },
       isReadonly() {
         return this.widgetReadonly;
-      },
-      hasSlot(name = null) {
-        if (name) return this.$slots[name];
-        return this.$slots.default
       }
     }
   }

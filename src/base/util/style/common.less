@@ -204,7 +204,7 @@
     height: 0;
   }
   &.right-enter-active {
-    .transition(all 0.1s ease)
+    .transition(all 0.3s ease)
   }
   &.right-leave {
     .transform(translateX(0));
@@ -213,7 +213,7 @@
     .transform(translateX(-100%));
     opacity: 0;
     height: 0;
-    .transition(all 0.1s ease)
+    .transition(all 0.3s ease)
   }
 }
 
@@ -246,7 +246,7 @@
     height: 0;
   }
   &.bottom-enter-active {
-    .transition(all 0.1s ease)
+    .transition(all 0.3s ease)
   }
   &.bottom-leave {
     .transform(translateY(0));
@@ -255,27 +255,41 @@
     .transform(translateY(-100%));
     opacity: 0;
     height: 0;
-    .transition(all 0.1s ease)
+    .transition(all 0.3s ease)
   }
 }
 
 // transition 变形Y
-.transition-to-scaleY() {
-  &.bottom-enter {
-    .transform(scaleY(0.5));
+.transition-to-scale() {
+  &.scale-enter {
+    .transform(scale(2));
+  }
+  &.scale-enter-active {
+    .transition(scale 0.3s ease);
+    .transform(scale(1));
+  }
+  &.scale-leave {
+    .transform(scale(1));
+  }
+  &.scale-leave-active {
+    .transform(scale(2));
+    .transition(scale 0.3s ease);
+  }
+}
+
+// transition opacity
+.transition-to-opacity() {
+  &.opacity-enter {
     opacity: 0;
   }
-  &.bottom-enter-active {
-    .transition(all 0.1s ease);
-    .transform(scaleY(1));
+  &.opacity-enter-active {
+    .transition(all 0.3s ease);
   }
-  &.bottom-leave {
-    .transform(translateY(0));
-    .transform(scaleY(1));
+  &.opacity-leave {
+    opacity: 1;
   }
-  &.bottom-leave-active {
-    .transform(scaleY(0.5));
-    .transition(all 0.1s ease);
+  &.opacity-leave-active {
+    .transition(all 0.3s ease);
     opacity: 0;
   }
 }

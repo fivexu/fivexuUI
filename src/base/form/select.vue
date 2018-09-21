@@ -16,7 +16,8 @@
         <div class="select_item text_hide" v-for="item in data"
              :class="[
                          {select_ac:!multiple&&selectValue===item.label},
-                         {select_ac:multiple&&item.checked}
+                         {select_ac:multiple&&item.checked},
+                         {disable:item.disable},
                          ]"
              @click="selectListClick(item)">
           {{item.label}}
@@ -97,6 +98,7 @@
       },
       // 单选逻辑
       _selectOnly(item) {
+        if (item.disable) return;
         this.readonly = false;
         setTimeout(() => {
           this.selectValue = item.label;
@@ -108,6 +110,7 @@
       },
       // 多选逻辑
       _selectMultiple(item) {
+        if (item.disable) return;
         let off = false;
         if (!item.checked && !this.selectMultipleList.length) {
           this.selectMultipleList.push(item);
@@ -134,7 +137,7 @@
       },
       // 多选删除
       deleteSelectItem(item) {
-        if (this.isDisabled()) {
+        if (this.isDisabled() || item.disable) {
           return
         }
         this.data.forEach(dataItem => {
@@ -231,6 +234,13 @@
         &.select_ac {
           background-color: @select-ac-bg !important;
           color: @select-ac-color !important;
+        }
+        &.disable {
+          color: @checkbox-disable-color !important;
+          cursor: not-allowed;
+          &:hover {
+            background-color: transparent;
+          }
         }
         &:hover {
           background-color: @select-hover-bg;
