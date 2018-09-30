@@ -5,15 +5,15 @@ class TooltipClass {
         this.bindPosition = bind.rawName.split('.')[1]; // tooltip 定位的位置
         this.tooltipPadding = 10; // tooltip 距离元素的距离
         this.tooltip = null;
-        this._init = null;
+        this._initTooltip = null;
         this.timer = null;
         this.addListen();
     }
 
     // 初始化 并显示tooltip
     show() {
-        if (!this._init) {
-            this.init();
+        if (!this._initTooltip) {
+            this.initTooltip();
         } else {
             setTimeout(() => {
                 this.getTooltipPosition(this.bindPosition);
@@ -26,14 +26,14 @@ class TooltipClass {
     hide() {
         this.tooltip.setAttribute('class', 'fivexu_tooltip');
         this.timer = setTimeout(() => {
-            this._init = false;
+            this._initTooltip = false;
             document.body.removeChild(this.tooltip);
         }, 10000)
     }
 
     // 删除 tooltip
     destroy() {
-        this._init = false;
+        this._initTooltip = false;
         if (this.tooltip) {
             document.body.removeChild(this.tooltip);
             this.currentElement.removeEventListener('mouseenter', this.show);
@@ -43,11 +43,11 @@ class TooltipClass {
 
     // 当tooltip存在时,仅改变内容
     setContent(msg) {
-        if (this._init) {
+        if (this._initTooltip) {
             this.tooltip.innerHTML = msg;
             this.tooltip.appendChild(this.tooltipAfter);
         } else {
-            this.init();
+            this.initTooltip();
         }
     }
 
@@ -81,14 +81,14 @@ class TooltipClass {
     }
 
     // 初始化tooltip
-    init() {
+    initTooltip() {
         let wrapperTooltip = document.createElement('div');
         let tooltipAfter = document.createElement('div');
         wrapperTooltip.innerHTML = this.bindValue;
         wrapperTooltip.appendChild(tooltipAfter);
         this.tooltip = wrapperTooltip;
         this.tooltipAfter = tooltipAfter;
-        this._init = true;
+        this._initTooltip = true;
         setTimeout(() => {
             document.body.appendChild(this.tooltip);
             this.getTooltipPosition(this.bindPosition);

@@ -1,21 +1,28 @@
 <template>
   <div class="modal">
     <fx-button @clickEvt="modal=true">modal</fx-button>
-    <fx-modal v-if="modal" @cancel="modal=false" @define="modal=false">
-      <div >
+    <fx-modal v-if="modal" @cancel="modal=false" @define="modal2=true">
+      <div>
         <p>fffffffffffffffffffffff</p>
         <p>fffffffffffffffffffffff</p>
         <p>fffffffffffffffffffffff</p>
         <p>fffffffffffffffffffffff</p>
         <p>fffffffffffffffffffffff</p>
-      </div>
-      <div slot="title">
-        <p>fawefaweg</p>
-      </div>
-      <div slot="footer">
-        <fx-button>ffff</fx-button>
       </div>
     </fx-modal>
+    <fx-modal v-if="modal2" @cancel="modal2=false" @define="modal2=false">
+      <div>
+        <p>fffffffffffffffffffffff</p>
+        <p>fffffffffffffffffffffff</p>
+        <p>fffffffffffffffffffffff</p>
+        <p>fffffffffffffffffffffff</p>
+        <p>fffffffffffffffffffffff</p>
+      </div>
+    </fx-modal>
+
+    <div style="width: 200px;height: 400px;border: 1px solid #ccc">
+      <div v-drag style="width: 20px;height: 20px;background-color: #f00"></div>
+    </div>
   </div>
 </template>
 
@@ -24,7 +31,8 @@
     name: "modal",
     data() {
       return {
-        modal: false
+        modal: false,
+        modal2: false,
       }
     }
   }

@@ -10,6 +10,7 @@ import DotRun from './dotRun/dotRun.js';
 // 指令
 import Tooltip from './tooltip/tooltipClass.js';
 import Loading from './loading/loading.js';
+import Drag from './drag/drag.js';
 // 组件
 import Page from './page/page'
 import FxButton from './form/button'
@@ -63,6 +64,7 @@ let global = {
     
     Vue.directive('tooltip', Tooltip);
     Vue.directive('loading', Loading);
+    Vue.directive('drag', Drag);
   }
 };
 

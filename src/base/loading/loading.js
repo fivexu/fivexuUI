@@ -2,11 +2,11 @@ class loading {
   constructor(el, bind) {
     this.currentElement = el;
     this.loadingWrapper = null;
-    this._init = null;
+    this._initLoading = null;
     bind.value ? this.show() : this.hide();
   }
 
-  init() {
+  initLoading() {
     this.loadingWrapper = document.createElement('div');
     this.loadingWrapper.setAttribute('class', 'fivexu_loading_wrapper');
     let loadingContent = document.createElement('div');
@@ -14,7 +14,7 @@ class loading {
     loadingContent.setAttribute('class', 'fivexu_loading_content');
     setTimeout(() => {
       let hasPosition = this._getStyle(this.currentElement, 'position');
-      this._init = true;
+      this._initLoading = true;
       if (hasPosition === 'static' || hasPosition === '') this.currentElement.style.position = 'relative';
       this.loadingWrapper.appendChild(loadingContent);
       this.currentElement.appendChild(this.loadingWrapper);
@@ -22,10 +22,10 @@ class loading {
   }
 
   show() {
-    if (this._init) {
+    if (this._initLoading) {
       this.loadingWrapper.style.display = 'block';
     } else {
-      this.init();
+      this.initLoading();
     }
   }
 
@@ -34,13 +34,13 @@ class loading {
   }
 
   hide() {
-    if (this._init) {
+    if (this._initLoading) {
       this.loadingWrapper.style.display = 'none';
     }
   }
 
   destroy() {
-    if (this._init) {
+    if (this._initLoading) {
       this.loadingWrapper.style.display = 'none';
     }
   }
