@@ -19,9 +19,8 @@
         <p>fffffffffffffffffffffff</p>
       </div>
     </fx-modal>
-
-    <div style="width: 200px;height: 400px;border: 1px solid #ccc">
-      <div v-drag style="width: 20px;height: 20px;background-color: #f00"></div>
+    <div style="margin-top:  1000px;width: 200px;height: 400px;border: 1px solid #ccc">
+      <div v-drag.fixed style="width: 20px;height: 20px;background-color: #f00"></div>
     </div>
   </div>
 </template>

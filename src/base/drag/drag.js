@@ -19,6 +19,9 @@ class drag {
       } else {
         this.currentElement.style.position = 'fixed';
       }
+      if (this.currentElement.style.left === '' && this.currentElement.style.right === '') this.currentElement.style.left = 0;
+      console.log(this.currentElement.style.top);
+      if (this.currentElement.style.top === '' && this.currentElement.style.bottom === '') this.currentElement.style.top = 0;
       this.currentElement.style[userSelect] = 'none';
       this.currentElement.style.cursor = 'move';
       this.add();
@@ -33,16 +36,9 @@ class drag {
     ev = ev || event;
     ev.stopPropagation();
     ev.preventDefault();
-    if (this.positionType === 'fixed') {
-      this.clientX = ev.clientX - this.currentElement.offsetLeft;
-      this.clientY = ev.clientY - this.currentElement.offsetTop;
-    } else {
-      let parentLeft = this.currentElement.parentNode.getClientRects()[0].left;
-      let parentTop = this.currentElement.parentNode.getClientRects()[0].top;
-      this.clientX = ev.clientX - this.currentElement.offsetLeft + parentLeft;
-      this.clientY = ev.clientY - this.currentElement.offsetTop + parentTop;
-    }
-    this.currentElement.style.userSelect = '';
+    this.clientX = ev.clientX - this.currentElement.offsetLeft;
+    this.clientY = ev.clientY - this.currentElement.offsetTop;
+    this.currentElement.style.userSelect = 'none';
     this.draging = true;
     window.addEventListener('mousemove', this.mousemove.bind(this));
     document.addEventListener('mouseup', this.mouseup.bind(this));
@@ -53,7 +49,7 @@ class drag {
     if (!this.draging) return;
     let left = ev.clientX - this.clientX;
     let top = ev.clientY - this.clientY;
-    
+    console.log(ev.clientX, this.clientX);
     if (left <= 0) left = 0;
     if (top <= 0) top = 0;
     if (this.positionType !== 'fixed') {
