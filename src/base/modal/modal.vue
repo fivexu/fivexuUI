@@ -1,6 +1,6 @@
 <template>
   <div class="fivexu_modal_wrapper" @keydown.stop="keyDown($event)">
-    <div class="fivexu_modal_bg" ref="modalBg" @click.stop="cancelModal"></div>
+    <div class="fivexu_modal_bg" ref="modalBg" @click.stop.prevent="cancelModal"></div>
     <div class="modal" ref="modal" v-drag.fixed :style="{width:`${width}px`}" :class="{ac:show}">
       <!-- title -->
       <div class="title" v-if="!hasSlot('title')&&isTitle">
@@ -18,6 +18,7 @@
       <div class="footer" v-if="!hasSlot('footer')&&isFooter">
         <fx-button @clickEvt="cancel" type="default">取消</fx-button>
         <fx-button @clickEvt="define">确定</fx-button>
+
       </div>
       <slot name="footer" v-else></slot>
       <!-- footer -->
@@ -52,7 +53,7 @@
       },
       isModalClose: {
         type: Boolean,
-        default: false
+        default: true
       }
     },
     data() {
@@ -70,7 +71,7 @@
         if (modalBg.length > 1)  this.$refs.modalBg.style.backgroundColor = 'rgba(0, 0, 0, .1)';
       },
       cancelModal() {
-        if (this.isModalClose) return;
+        if (!this.isModalClose) return;
         this.$emit('cancel', null);
       },
       cancel() {
