@@ -1,6 +1,6 @@
 <template>
-  <div id="modal" @keydown.stop="keyDown($event)">
-    <div class="modal_bg" @click.stop="cancelModal"></div>
+  <div class="fivexu_modal_wrapper" @keydown.stop="keyDown($event)">
+    <div class="fivexu_modal_bg" ref="modalBg" @click.stop="cancelModal"></div>
     <div class="modal" ref="modal" v-drag.fixed :style="{width:`${width}px`}" :class="{ac:show}">
       <!-- title -->
       <div class="title" v-if="!hasSlot('title')&&isTitle">
@@ -32,7 +32,8 @@
   export default {
     extends: Global,
     name: "modal",
-    props: {
+    props:
+      {
       width: {
         type: Number,
         default: 400
@@ -61,7 +62,12 @@
     },
     methods: {
       _initStyle() {
-        this.$refs.modal.style.left = `${window.innerWidth / 2 - this.$refs.modal.offsetWidth / 2}px`
+        let modalBg = document.getElementsByClassName('fivexu_modal_bg');
+        this.$refs.modal.style.left = `${window.innerWidth / 2 - this.$refs.modal.offsetWidth / 2}px`;
+        this.$refs.modal.style.top = `20px`;
+        this.$refs.modal.style.zIndex = modalBg.length + 1000;
+        this.$refs.modalBg.style.zIndex = modalBg.length + 1000;
+        if (modalBg.length > 1)  this.$refs.modalBg.style.backgroundColor = 'rgba(0, 0, 0, .1)';
       },
       cancelModal() {
         if (this.isModalClose) return;
@@ -99,9 +105,8 @@
 <style scoped lang="less">
   @import "../util/style/common.less";
 
-  #modal {
-
-    .modal_bg {
+  .fivexu_modal_wrapper {
+    .fivexu_modal_bg {
       width: 100%;
       height: 100%;
       position: fixed;

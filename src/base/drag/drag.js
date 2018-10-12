@@ -20,7 +20,6 @@ class drag {
         this.currentElement.style.position = 'fixed';
       }
       if (this.currentElement.style.left === '' && this.currentElement.style.right === '') this.currentElement.style.left = 0;
-      console.log(this.currentElement.style.top);
       if (this.currentElement.style.top === '' && this.currentElement.style.bottom === '') this.currentElement.style.top = 0;
       this.currentElement.style[userSelect] = 'none';
       this.currentElement.style.cursor = 'move';
@@ -49,7 +48,6 @@ class drag {
     if (!this.draging) return;
     let left = ev.clientX - this.clientX;
     let top = ev.clientY - this.clientY;
-    console.log(ev.clientX, this.clientX);
     if (left <= 0) left = 0;
     if (top <= 0) top = 0;
     if (this.positionType !== 'fixed') {

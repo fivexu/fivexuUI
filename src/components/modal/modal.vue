@@ -1,27 +1,34 @@
 <template>
   <div class="modal">
-    <fx-button @clickEvt="modal=true">modal</fx-button>
-    <fx-modal v-if="modal" @cancel="modal=false" @define="modal2=true">
-      <div>
-        <p>fffffffffffffffffffffff</p>
-        <p>fffffffffffffffffffffff</p>
-        <p>fffffffffffffffffffffff</p>
-        <p>fffffffffffffffffffffff</p>
-        <p>fffffffffffffffffffffff</p>
-      </div>
-    </fx-modal>
-    <fx-modal v-if="modal2" @cancel="modal2=false" @define="modal2=false">
-      <div>
-        <p>fffffffffffffffffffffff</p>
-        <p>fffffffffffffffffffffff</p>
-        <p>fffffffffffffffffffffff</p>
-        <p>fffffffffffffffffffffff</p>
-        <p>fffffffffffffffffffffff</p>
-      </div>
-    </fx-modal>
-    <div style="margin-top:  1000px;width: 200px;height: 400px;border: 1px solid #ccc">
-      <div v-drag.fixed style="width: 20px;height: 20px;background-color: #f00"></div>
-    </div>
+    <ul>
+      <li>
+        <h3>弹窗默认</h3>
+        <h3>回调方法 cancel 取消和×按钮操作 define 确定按钮回调</h3>
+        <fx-button @clickEvt="modal=true">modal</fx-button>
+        <fx-modal v-if="modal" @cancel="modal=false" @define="modal=false">
+          <div>
+            <p>fffffffffffffffffffffff</p>
+            <p>fffffffffffffffffffffff</p>
+            <p>fffffffffffffffffffffff</p>
+            <p>fffffffffffffffffffffff</p>
+            <p>fffffffffffffffffffffff</p>
+          </div>
+        </fx-modal>
+      </li>
+      <li>
+        <h3>弹窗宽度设置 width 数字 默认400</h3>
+        <fx-button @clickEvt="modal2=true">modal width=1000</fx-button>
+        <fx-modal width="1000" v-if="modal2" @cancel="modal2=false" @define="modal2=false">
+          <div>
+            <p>fffffffffffffffffffffff</p>
+            <p>fffffffffffffffffffffff</p>
+            <p>fffffffffffffffffffffff</p>
+            <p>fffffffffffffffffffffff</p>
+            <p>fffffffffffffffffffffff</p>
+          </div>
+        </fx-modal>
+      </li>
+    </ul>
   </div>
 </template>
 
