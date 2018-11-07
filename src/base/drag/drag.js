@@ -1,10 +1,7 @@
 import {prefixStyle} from "../../common/js/common";
 
-const userSelect = prefixStyle('userSelect');
-
 class drag {
   constructor(el, bind) {
-    console.log(bind.rawName.split('.')[1]);
     this.currentElement = el;
     this.positionType = bind.rawName.split('.')[1] || 'absolute';
     this._initDrag();
@@ -21,8 +18,6 @@ class drag {
       }
       if (this.currentElement.style.left === '' && this.currentElement.style.right === '') this.currentElement.style.left = 0;
       if (this.currentElement.style.top === '' && this.currentElement.style.bottom === '') this.currentElement.style.top = 0;
-      this.currentElement.style[userSelect] = 'none';
-      this.currentElement.style.cursor = 'move';
       this.add();
     }, 100)
   }
@@ -37,7 +32,6 @@ class drag {
     ev.preventDefault();
     this.clientX = ev.clientX - this.currentElement.offsetLeft;
     this.clientY = ev.clientY - this.currentElement.offsetTop;
-    this.currentElement.style.userSelect = 'none';
     this.draging = true;
     window.addEventListener('mousemove', this.mousemove.bind(this));
     document.addEventListener('mouseup', this.mouseup.bind(this));

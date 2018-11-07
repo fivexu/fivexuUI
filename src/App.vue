@@ -20,6 +20,8 @@
 </template>
 
 <script>
+  import axios from 'axios'
+
   export default {
     data() {
       return {
@@ -107,7 +109,7 @@
       this.$nextTick(() => {
         setTimeout(() => {
           this.$refs.bgs.style.backgroundColor = 'transparent';
-        }, 2500)
+        }, 2500);
       })
     }
   }

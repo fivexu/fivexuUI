@@ -1,7 +1,7 @@
 <template>
-  <div class="fivexu_modal_wrapper" @keydown.stop="keyDown($event)">
+  <div class="fivexu_modal_wrapper">
     <div class="fivexu_modal_bg" ref="modalBg" @click.stop.prevent="cancelModal"></div>
-    <div class="modal" ref="modal" v-drag.fixed :style="{width:`${width}px`}" :class="{ac:show}">
+    <div class="modal" ref="modal" :style="{width:`${Number(width)}px`}" :class="{ac:show}">
       <!-- title -->
       <div class="title" v-if="!hasSlot('title')&&isTitle">
         <h6>{{title}}</h6>
@@ -35,27 +35,27 @@
     name: "modal",
     props:
       {
-      width: {
-        type: Number,
-        default: 400
+        width: {
+          type: Number | String,
+          default: 400
+        },
+        title: {
+          type: String,
+          default: '提示'
+        },
+        isFooter: {
+          type: Boolean,
+          default: true
+        },
+        isTitle: {
+          type: Boolean,
+          default: true
+        },
+        isModalClose: {
+          type: Boolean,
+          default: true
+        }
       },
-      title: {
-        type: String,
-        default: '提示'
-      },
-      isFooter: {
-        type: Boolean,
-        default: true
-      },
-      isTitle: {
-        type: Boolean,
-        default: true
-      },
-      isModalClose: {
-        type: Boolean,
-        default: true
-      }
-    },
     data() {
       return {
         show: false
@@ -68,7 +68,7 @@
         this.$refs.modal.style.top = `20px`;
         this.$refs.modal.style.zIndex = modalBg.length + 1000;
         this.$refs.modalBg.style.zIndex = modalBg.length + 1000;
-        if (modalBg.length > 1)  this.$refs.modalBg.style.backgroundColor = 'rgba(0, 0, 0, .1)';
+        if (modalBg.length > 1) this.$refs.modalBg.style.backgroundColor = 'rgba(0, 0, 0, .1)';
       },
       cancelModal() {
         if (!this.isModalClose) return;
@@ -82,19 +82,23 @@
       },
       keyDown(ev) {
         ev = ev || event;
+        console.log(ev.keyCode);
         if (ev.keyCode === 27) this.cancel();
       }
     },
     mounted() {
       this.$nextTick(() => {
-        // window.addEventListener('keydown', this.keyDown.bind(this));
+        window.addEventListener('keydown', this.keyDown.bind(this));
         this._initStyle();
         setTimeout(() => {
           this.show = true;
         }, 30)
       })
     },
-    destroy() {
+    beforeDestroy() {
+      window.removeEventListener('keydown', this.keyDown.bind(this));
+    },
+    destroyed() {
       window.removeEventListener('keydown', this.keyDown.bind(this));
     },
     components: {

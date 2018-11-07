@@ -83,7 +83,7 @@
       <li>
         <h3>插槽模式 slot=title slot=footer slot=default</h3>
         <fx-button @clickEvt="modal7=true">modal isModalClose=false</fx-button>
-        <fx-modal :isModalClose="false" v-if="modal7" @cancel="modal7=false" @define="modal7=false">
+        <fx-modal v-if="modal7" @cancel="modal7=false" @define="modal7=false">
           <div slot="title" class="title">
             <fx-button>插槽标题</fx-button>
           </div>
@@ -98,8 +98,7 @@
             </p>
           </div>
           <div slot="footer" style="margin-top: 10px;">
-            <fx-input></fx-input>
-            <fx-button>插槽底部</fx-button>
+            <fx-button @clickEvt="modal7=false">插槽底部</fx-button>
           </div>
         </fx-modal>
       </li>
